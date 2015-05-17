@@ -1,19 +1,42 @@
+#!/usr/bin/env node
+
 var Crawler = require("simplecrawler"),
     _ = require("lodash"),
     moment = require("moment"),
     fs = require("fs"),
-    builder = require("xmlbuilder");
+    builder = require("xmlbuilder"),
+    program = require("commander"),
+    chalk = require("chalk");
 
+program.version("0.1.0")
+        .usage("<keywords>")
+        .option("-u, --url [url]", "url to crawl, required")
+        .option("-p, --protocol [protocol]", "http protocol to use")
+        .option("-d, --depth [depth]", "max depth to crawl")
+        .option("-q, --query", "consider query string")
+        .parse(process.argv);
+
+if (!program.url) {
+    program.help();
+}
 
 var chunk = [],
-    args = process.argv.slice(2),
-    c = new Crawler(args[0]);
+    c = new Crawler(program.url);
 
 c.initialPath = "/";
 c.initialPort = 80;
-c.initialProtocol = "http";
+
+if (program.protocol) {
+    c.initialProtocol = program.protocol;
+} else {
+    c.initialProtocol = "http";
+}
+
 c.maxDepth = 10;
-c.stripQuerystring = true;
+
+if (!program.query) {
+    c.stripQuerystring = true;
+}
 
 c.on("fetchcomplete", function(item) {
     if (!_.has(chunk, item.url)) {
@@ -22,24 +45,28 @@ c.on("fetchcomplete", function(item) {
             // TODO: date ersetzen, da deprecated?
             lastmod: moment(new Date(item.stateData.headers["last-modified"])).format("YYYY-MM-DD"),
             // TODO: calculate changefreq
-            //changefreq: "always",
+            changefreq: "always",
             priority: round((1 - ((item.depth - 1) / 10)), 2)
         });
     }
 
-    console.log(item.url);
+    console.log(chalk.gray(item.url));
 });
 
 c.on("fetcherror", function(item, response) {
-    console.log(response);
+    console.log(chalk.red("error fetching url"));
 });
 
 c.on("complete", function() {
-    console.log("Done!");
+    console.log(chalk.green.bold("Sitemap successfully created!"));
 
     var xml = builder.create("urlset", { version: "1.0", encoding: "UTF-8" }).att("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9");
     _.forIn(chunk, function(value, key) {
-        xml.ele("url").ele("loc", value.loc).up().ele("lastmod", value.lastmod).up().ele("changefreq", value.changefreq).up().ele("priority", value.priority);
+        xml.ele("url")
+            .ele("loc", value.loc);
+            //.up().ele("lastmod", value.lastmod)
+            //.up().ele("changefreq", value.changefreq)
+            //.up().ele("priority", value.priority);
     });
 
     var map = xml.end({ pretty: true, indent: '    ', newline: "\n" });
@@ -52,12 +79,12 @@ c.on("complete", function() {
 });
 
 c.addFetchCondition(function(parsedURL) {
-    // @TODO: add fonts
-    return !parsedURL.path.match(/\.(pdf|json|xml|gif|jpg|jpeg|png|svg|css|js|rss|atom|ico|ogg|bmp|webp|mp4|webm)$/i);
+    return !parsedURL.path.match(/\.(pdf|json|xml|gif|jpg|jpeg|png|svg|css|js|rss|atom|ico|ogg|bmp|webp|mp4|webm|gzip|ttf|woff)$/i);
 });
 
 c.start();
 
+// helper function for rounding
 function round(value, exp) {
     if (typeof exp === 'undefined' || +exp === 0)
         return Math.round(value);
