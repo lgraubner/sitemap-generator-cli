@@ -1,0 +1,17 @@
+{
+    "name": "node-sitemap-generator",
+    "description": "Creates a XML-Sitemap by crawling a given site.",
+    "version": "0.1.0",
+    "homepage": "https://github.com/lgraubner/node-sitemap-generator",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/lgraubner/node-sitemap-generator.git"
+    },
+    "dependencies": {
+        "simplecrawler": "^0.5.2",
+        "lodash": "^3.8.0",
+        "moment": "^2.10.3",
+        "xmlbuilder": "^2.6.2"
+    }
+}
