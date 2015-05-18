@@ -53,13 +53,11 @@ c.on("fetchcomplete", function(item) {
     console.log(chalk.gray(item.url));
 });
 
-c.on("fetcherror", function(item, response) {
-    console.log(chalk.red("error fetching url"));
+c.on("fetch404", function(item, response) {
+    console.log(chalk.red(item.url));
 });
 
 c.on("complete", function() {
-    console.log(chalk.green.bold("Sitemap successfully created!"));
-
     var xml = builder.create("urlset", { version: "1.0", encoding: "UTF-8" }).att("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9");
     _.forIn(chunk, function(value, key) {
         xml.ele("url")
@@ -75,6 +73,9 @@ c.on("complete", function() {
         if (err) {
             return console.log(err);
         }
+
+        console.log(chalk.white("Fetched %s links, encountered %s errors."), c.queue.complete(), c.queue.errors());
+        console.log(chalk.green.bold("Sitemap successfully created!"));
     });
 });
 
