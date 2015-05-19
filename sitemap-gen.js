@@ -8,7 +8,7 @@ var Crawler = require("simplecrawler"),
     program = require("commander"),
     chalk = require("chalk");
 
-program.version("0.1.0")
+program.version("0.2.0")
         .usage("<keywords>")
         .option("-u, --url [url]", "url to crawl, required")
         .option("-p, --protocol [protocol]", "http protocol to use")
@@ -25,6 +25,7 @@ var chunk = [],
 
 c.initialPath = "/";
 c.initialPort = 80;
+c.userAgent = "Node/Sitemap-Generator";
 
 if (program.protocol) {
     c.initialProtocol = program.protocol;
@@ -50,11 +51,15 @@ c.on("fetchcomplete", function(item) {
         });
     }
 
-    console.log(chalk.gray(item.url));
+    console.log(chalk.cyan.bold("Found:"), chalk.gray(item.url));
 });
 
 c.on("fetch404", function(item, response) {
-    console.log(chalk.red(item.url));
+    console.log(chalk.red.bold("Not found:"), chalk.gray(item.url));
+});
+
+c.on("fetcherror", function(item, response) {
+    console.log(chalk.red.bold("Fetch error:"), chalk.gray(item.url));
 });
 
 c.on("complete", function() {
