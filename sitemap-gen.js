@@ -86,7 +86,7 @@ c.on("complete", function() {
 });
 
 c.addFetchCondition(function(parsedURL) {
-    return !parsedURL.path.match(/\.(pdf|json|xml|gif|jpg|jpeg|png|svg|css|js|rss|atom|ico|ogg|bmp|webp|mp4|webm|gzip|ttf|woff)$/i);
+    return !parsedURL.path.match(/\.(pdf|json|xml|gif|jpg|jpeg|png|svg|css|js|rss|atom|ico|ogg|bmp|webp|mp4|webm|gzip|ttf|woff|mp3|gz|zip|rar|7z)$/i);
 });
 
 c.start();
