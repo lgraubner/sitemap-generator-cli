@@ -6,9 +6,10 @@ var Crawler = require("simplecrawler"),
     fs = require("fs"),
     builder = require("xmlbuilder"),
     program = require("commander"),
-    chalk = require("chalk");
+    chalk = require("chalk"),
+    pkg = require("./package.json");
 
-program.version("0.2.0")
+program.version(pkg.version)
         .usage("<keywords>")
         .option("-u, --url [url]", "url to crawl, required")
         .option("-p, --protocol [protocol]", "http protocol to use")
