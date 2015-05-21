@@ -9,11 +9,11 @@ npm install -g
 sitemap-gen -u example.com
 ```
 
+*Important*: Relative Links without leading slash are producing errors.
+
 ### Options
 
 |command|description
 |:---|:---
-|-u, --url [url]|url to crawl, required
-|-p, --protocol [protocol]|http protocol to use
-|-d, --depth [depth]|max depth to crawl
+|-u, --url [url]|URL to crawl (required)
 |-q, --query|consider query string
