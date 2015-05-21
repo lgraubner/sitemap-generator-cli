@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 var Crawler = require("simplecrawler"),
-    _ = require("lodash"),
-    moment = require("moment"),
+    forIn = require("lodash/object/forIn"),
     fs = require("fs"),
     builder = require("xmlbuilder"),
     program = require("commander"),
@@ -32,16 +31,9 @@ if (!program.query) {
 }
 
 c.on("fetchcomplete", function(item) {
-    if (!_.has(chunk, item.url)) {
-        chunk.push({
-            loc: item.url,
-            // TODO: date ersetzen, da deprecated?
-            lastmod: moment(new Date(item.stateData.headers["last-modified"])).format("YYYY-MM-DD"),
-            // TODO: calculate changefreq
-            changefreq: "always",
-            priority: round((1 - ((item.depth - 1) / 10)), 2)
-        });
-    }
+    chunk.push({
+        loc: item.url
+    });
 
     console.log(chalk.cyan.bold("Found:"), chalk.gray(item.url));
 });
@@ -56,12 +48,9 @@ c.on("fetcherror", function(item, response) {
 
 c.on("complete", function() {
     var xml = builder.create("urlset", { version: "1.0", encoding: "UTF-8" }).att("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9");
-    _.forIn(chunk, function(value, key) {
+    forIn(chunk, function(value, key) {
         xml.ele("url")
-            .ele("loc", value.loc);
-            //.up().ele("lastmod", value.lastmod)
-            //.up().ele("changefreq", value.changefreq)
-            //.up().ele("priority", value.priority);
+            .ele(value);
     });
 
     var map = xml.end({ pretty: true, indent: '    ', newline: "\n" });
