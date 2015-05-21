@@ -71,7 +71,7 @@ c.on("complete", function() {
             return console.log(err);
         }
 
-        console.log(chalk.white("Fetched %s links, encountered %s errors."), c.queue.complete(), c.queue.errors());
+        console.log(chalk.white("Fetched %s sites, encountered %s errors."), c.queue.complete(), c.queue.errors());
         console.log(chalk.green.bold("Sitemap successfully created!"));
     });
 });
