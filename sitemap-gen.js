@@ -12,7 +12,6 @@ var Crawler = require("simplecrawler"),
 program.version(pkg.version)
         .usage("<keywords>")
         .option("-u, --url [url]", "URL to crawl (required)")
-        .option("-d, --depth [depth]", "max depth to crawl")
         .option("-q, --query", "consider query string")
         .parse(process.argv);
 
@@ -25,10 +24,8 @@ var chunk = [],
 
 c.initialPath = "/";
 c.initialPort = 80;
-c.userAgent = "Node/Sitemap-Generator";
 c.initialProtocol = "http";
-
-c.maxDepth = 10;
+c.userAgent = "Node/Sitemap-Generator";
 
 if (!program.query) {
     c.stripQuerystring = true;
