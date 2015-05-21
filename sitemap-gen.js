@@ -85,8 +85,24 @@ c.on("complete", function() {
     });
 });
 
-c.addFetchCondition(function(parsedURL) {
-    return !parsedURL.path.match(/\.(pdf|json|xml|gif|jpg|jpeg|png|svg|css|js|rss|atom|ico|ogg|bmp|webp|mp4|webm|gzip|ttf|woff|mp3|gz|zip|rar|7z)$/i);
+var image = c.addFetchCondition(function(parsedURL) {
+    return !parsedURL.path.match(/\.(gif|jpg|jpeg|png|svg|ico|bmp)$/i);
+});
+
+var media = c.addFetchCondition(function(parsedURL) {
+    return !parsedURL.path.match(/\.(pdf|ogg|webp|mp4|webm|mp3)$/i);
+});
+
+var font = c.addFetchCondition(function(parsedURL) {
+    return !parsedURL.path.match(/\.(ttf|woff)$/i);
+});
+
+var data = c.addFetchCondition(function(parsedURL) {
+    return !parsedURL.path.match(/\.(json|xml|rss|atom|gz|zip|rar|7z)$/i);
+});
+
+var misc = c.addFetchCondition(function(parsedURL) {
+    return !parsedURL.path.match(/\.(css|js|gzip|swf)$/i);
 });
 
 c.start();
