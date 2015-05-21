@@ -6,7 +6,8 @@ Creates a XML-Sitemap by crawling a given site.
 ```BASH
 npm install -g
 
-sitemap-gen -u example.com
+# sitemap-gen [options] <url>
+sitemap-gen --query example.com
 ```
 
 *Important*: Relative Links without leading slash are producing errors.
@@ -15,5 +16,4 @@ sitemap-gen -u example.com
 
 |command|description
 |:---|:---
-|-u, --url [url]|URL to crawl (required)
 |-q, --query|consider query string
