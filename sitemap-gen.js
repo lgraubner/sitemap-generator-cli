@@ -9,17 +9,16 @@ var Crawler = require("simplecrawler"),
     pkg = require("./package.json");
 
 program.version(pkg.version)
-        .usage("<keywords>")
-        .option("-u, --url [url]", "URL to crawl (required)")
+        .usage("[options] <url>")
         .option("-q, --query", "consider query string")
         .parse(process.argv);
 
-if (!program.url) {
+if (!program.args[0]) {
     program.help();
 }
 
 var chunk = [],
-    c = new Crawler(program.url);
+    c = new Crawler(program.args[0]);
 
 c.initialPath = "/";
 c.initialPort = 80;
