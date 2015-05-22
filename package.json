@@ -15,7 +15,6 @@
   "dependencies": {
     "simplecrawler": "^0.5.2",
     "lodash": "^3.8.0",
-    "moment": "^2.10.3",
     "xmlbuilder": "^2.6.2",
     "commander": "^2.8.1",
     "chalk": "1.0.0"
