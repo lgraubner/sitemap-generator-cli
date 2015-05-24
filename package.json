@@ -19,9 +19,6 @@
     "commander": "^2.8.1",
     "chalk": "1.0.0"
   },
-  "scripts": {
-    "crawl": "node crawler.js"
-  },
   "bin": {
     "sitemap-gen": "sitemap-gen.js"
   }
