@@ -65,11 +65,11 @@ c.on("complete", function() {
 });
 
 var image = c.addFetchCondition(function(parsedURL) {
-    return !parsedURL.path.match(/\.(gif|jpg|jpeg|png|ico|bmp)$/i);
+    return !parsedURL.path.match(/\.(gif|jpg|jpeg|png|ico|bmp)/i);
 });
 
 var media = c.addFetchCondition(function(parsedURL) {
-    return !parsedURL.path.match(/\.(ogg|webp|mp4|webm|mp3)$/i);
+    return !parsedURL.path.match(/\.(ogg|webp|mp4|webm|mp3)/i);
 });
 
 var font = c.addFetchCondition(function(parsedURL) {
@@ -77,11 +77,11 @@ var font = c.addFetchCondition(function(parsedURL) {
 });
 
 var data = c.addFetchCondition(function(parsedURL) {
-    return !parsedURL.path.match(/\.(json|rss|atom|gz|zip|rar|7z)$/i);
+    return !parsedURL.path.match(/\.(json|rss|atom|gz|zip|rar|7z)/i);
 });
 
 var misc = c.addFetchCondition(function(parsedURL) {
-    return !parsedURL.path.match(/\.(css|js|gzip)$/i);
+    return !parsedURL.path.match(/\.(css|js|gzip)/i);
 });
 
 c.start();
