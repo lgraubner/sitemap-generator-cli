@@ -81,7 +81,7 @@ var data = c.addFetchCondition(function(parsedURL) {
 });
 
 var misc = c.addFetchCondition(function(parsedURL) {
-    return !parsedURL.path.match(/\.(css|js|gzip)/i);
+    return !parsedURL.path.match(/\.(css|js|gzip|exe)/i);
 });
 
 c.start();
