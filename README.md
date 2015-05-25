@@ -1,4 +1,4 @@
-# node-sitemap-generator
+# Node Sitemap Generator
 Creates a XML-Sitemap by crawling a given site.
 
 ## Usage
