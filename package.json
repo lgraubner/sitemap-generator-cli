@@ -1,5 +1,5 @@
 {
-  "name": "node-sitemap-generator",
+  "name": "@lgraubner/sitemap-generator",
   "description": "Creates a XML-Sitemap by crawling a given site.",
   "version": "0.3.4",
   "homepage": "https://github.com/lgraubner/node-sitemap-generator",
