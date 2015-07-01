@@ -1,7 +1,7 @@
 {
   "name": "@lgraubner/sitemap-generator",
   "description": "Creates a XML-Sitemap by crawling a given site.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/lgraubner/node-sitemap-generator",
   "license": "MIT",
   "author": "Lars Graubner <mail@larsgraubner.de>",
@@ -12,6 +12,7 @@
   "engines": {
     "node": ">=0.10"
   },
+  "private": true,
   "dependencies": {
     "simplecrawler": "^0.5.2",
     "lodash": "^3.8.0",

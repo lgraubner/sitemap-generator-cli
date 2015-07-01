@@ -56,10 +56,10 @@ c.on("complete", function() {
 
     fs.writeFile("sitemap.xml", map, function(err) {
         if (err) {
-            return console.log(err);
+            return console.log(chalk.red(err));
         }
 
-        console.log(chalk.white("Fetched %s sites, encountered %s errors."), c.queue.complete(), c.queue.errors());
+        console.log(chalk.white("Fetched %s sites, encountered %s errors."), chunk.length, c.queue.errors());
         console.log(chalk.green.bold("Sitemap successfully created!"));
     });
 });
