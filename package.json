@@ -1,27 +1,27 @@
 {
   "name": "@lgraubner/sitemap-generator",
-  "description": "Creates a XML-Sitemap by crawling a given site.",
   "version": "1.0.1",
+  "description": "Creates a XML-Sitemap by crawling a given site.",
   "homepage": "https://github.com/lgraubner/node-sitemap-generator",
-  "license": "MIT",
   "author": "Lars Graubner <mail@larsgraubner.de>",
+  "main": "sitemap-gen.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/lgraubner/node-sitemap-generator.git"
   },
-  "engines": {
-    "node": ">=0.10"
+  "bugs": {
+      "url": "https://github.com/lgraubner/node-sitemap-generator/issues"
   },
-  "private": true,
   "dependencies": {
     "simplecrawler": "^0.5.2",
     "lodash": "^3.8.0",
     "xmlbuilder": "^2.6.2",
     "commander": "^2.8.1",
-    "chalk": "1.0.0"
+    "chalk": "^1.0.0"
   },
+  "preferGlobal": true,
   "bin": {
     "sitemap-gen": "sitemap-gen.js"
   },
-  "scripts": {}
+  "license": "MIT"
 }
