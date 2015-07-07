@@ -1,6 +1,6 @@
 {
   "name": "@lgraubner/sitemap-generator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Creates a XML-Sitemap by crawling a given site.",
   "homepage": "https://github.com/lgraubner/node-sitemap-generator",
   "author": "Lars Graubner <mail@larsgraubner.de>",

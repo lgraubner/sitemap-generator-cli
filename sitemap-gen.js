@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-var Crawler = require("simplecrawler"),
-    forIn = require("lodash/object/forIn"),
-    fs = require("fs"),
-    builder = require("xmlbuilder"),
-    program = require("commander"),
-    chalk = require("chalk"),
-    pkg = require("./package.json");
+var Crawler = require("simplecrawler");
+var forIn = require("lodash/object/forIn");
+var fs = require("fs");
+var builder = require("xmlbuilder");
+var program = require("commander");
+var chalk = require("chalk");
+var pkg = require("./package.json");
 
 program.version(pkg.version)
         .usage("[options] <url>")
@@ -17,8 +17,8 @@ if (!program.args[0]) {
     program.help();
 }
 
-var chunk = [],
-    c = new Crawler(program.args[0]);
+var chunk = [];
+var c = new Crawler(program.args[0]);
 
 c.initialPath = "/";
 c.initialPort = 80;
