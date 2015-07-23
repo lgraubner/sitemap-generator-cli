@@ -11,6 +11,7 @@ var pkg = require("./package.json");
 program.version(pkg.version)
         .usage("[options] <url>")
         .option("-q, --query", "consider query string")
+        .option("-o, --output [path]", "specify output path")
         .parse(process.argv);
 
 if (!program.args[0]) {
@@ -27,6 +28,11 @@ c.userAgent = "Node/Sitemap-Generator";
 
 if (!program.query) {
     c.stripQuerystring = true;
+}
+
+var path = "./";
+if (program.output) {
+    path = program.output;
 }
 
 c.on("fetchcomplete", function(item) {
@@ -54,7 +60,7 @@ c.on("complete", function() {
 
     var map = xml.end({ pretty: true, indent: '    ', newline: "\n" });
 
-    fs.writeFile("sitemap.xml", map, function(err) {
+    fs.writeFile(path + "sitemap.xml", map, function(err) {
         if (err) {
             return console.log(chalk.red(err));
         }
