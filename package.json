@@ -1,6 +1,6 @@
 {
   "name": "sitemap-generator",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Creates a XML-Sitemap by crawling a given site.",
   "homepage": "https://github.com/lgraubner/node-sitemap-generator",
   "author": "Lars Graubner <mail@larsgraubner.de>",
@@ -19,10 +19,10 @@
   },
   "dependencies": {
     "simplecrawler": "^0.5.2",
-    "lodash": "^3.8.0",
-    "xmlbuilder": "^2.6.2",
+    "lodash": "^3.10.0",
+    "xmlbuilder": "^2.6.4",
     "commander": "^2.8.1",
-    "chalk": "^1.0.0"
+    "chalk": "^1.1.0"
   },
   "preferGlobal": true,
   "bin": {

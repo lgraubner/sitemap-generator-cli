@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var Crawler = require("simplecrawler");
-var forIn = require("lodash/object/forIn");
+var _ = require("lodash");
 var fs = require("fs");
 var builder = require("xmlbuilder");
 var program = require("commander");
@@ -11,6 +11,8 @@ var pkg = require("./package.json");
 program.version(pkg.version)
         .usage("[options] <url>")
         .option("-q, --query", "consider query string")
+        .option("-i, --include [ext,ext2]", "include fetched links by file extension, comma seperated")
+        .option("-e, --exclude [ext,ext2]", "exclude fetched links by file extension, comma seperated")
         .option("-o, --output [path]", "specify output path")
         .parse(process.argv);
 
@@ -30,10 +32,27 @@ if (!program.query) {
     c.stripQuerystring = true;
 }
 
-var path = "./";
+var path = ".";
 if (program.output) {
-    path = program.output;
+    path = program.output.replace(/\/+$/, "");
 }
+
+var exclude = ["gif", "jpg", "jpeg", "png", "ico", "bmp", "ogg", "webp", "mp4", "webm", "mp3", "ttf", "woff", "json", "rss", "atom", "gz", "zip", "rar", "7z", "css", "js", "gzip", "exe"];
+
+if (program.include) {
+    exclude = _.difference(exclude, program.include.split(","));
+}
+
+if (program.exclude) {
+    exclude = _.union(exclude, program.exclude.split(","));
+}
+
+var exts = exclude.join("|");
+var regex = new RegExp("\.(" + exts + ")", "i");
+
+c.addFetchCondition(function(parsedURL) {
+    return !parsedURL.path.match(regex);
+});
 
 c.on("fetchcomplete", function(item) {
     chunk.push({
@@ -53,14 +72,14 @@ c.on("fetcherror", function(item, response) {
 
 c.on("complete", function() {
     var xml = builder.create("urlset", { version: "1.0", encoding: "UTF-8" }).att("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9");
-    forIn(chunk, function(value, key) {
+    _.forIn(chunk, function(value, key) {
         xml.ele("url")
             .ele(value);
     });
 
     var map = xml.end({ pretty: true, indent: '    ', newline: "\n" });
 
-    fs.writeFile(path + "sitemap.xml", map, function(err) {
+    fs.writeFile(path + "/sitemap.xml", map, function(err) {
         if (err) {
             return console.log(chalk.red(err));
         }
@@ -68,26 +87,6 @@ c.on("complete", function() {
         console.log(chalk.white("Fetched %s sites, encountered %s errors."), chunk.length, c.queue.errors());
         console.log(chalk.green.bold("Sitemap successfully created!"));
     });
-});
-
-var image = c.addFetchCondition(function(parsedURL) {
-    return !parsedURL.path.match(/\.(gif|jpg|jpeg|png|ico|bmp)/i);
-});
-
-var media = c.addFetchCondition(function(parsedURL) {
-    return !parsedURL.path.match(/\.(ogg|webp|mp4|webm|mp3)/i);
-});
-
-var font = c.addFetchCondition(function(parsedURL) {
-    return !parsedURL.path.match(/\.(ttf|woff)$/i);
-});
-
-var data = c.addFetchCondition(function(parsedURL) {
-    return !parsedURL.path.match(/\.(json|rss|atom|gz|zip|rar|7z)/i);
-});
-
-var misc = c.addFetchCondition(function(parsedURL) {
-    return !parsedURL.path.match(/\.(css|js|gzip|exe)/i);
 });
 
 c.start();
