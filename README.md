@@ -14,7 +14,7 @@ $ sitemap-gen [options] <url>
 
 ### Options
 ```BASH
-sitemap-gen --help
+$ sitemap-gen --help
 
   Usage: sitemap-gen [options] <url>
 
