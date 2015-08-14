@@ -1,5 +1,5 @@
 # Node Sitemap Generator
-Creates a XML-Sitemap by crawling a given site.
+Creates an XML-Sitemap by crawling a given site.
 
 ![](http://lgraubner.github.io/node-sitemap-generator/sitemap_generator.gif)
 
