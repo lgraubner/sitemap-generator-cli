@@ -11,14 +11,14 @@ $ npm install -g sitemap-generator
 
 ## Usage
 ```BASH
-$ sitemap-gen [options] <url>
+$ sitemap-generator [options] <url>
 ```
 
 ### Options
 ```BASH
-$ sitemap-gen --help
+$ sitemap-generator --help
 
-  Usage: sitemap-gen [options] <url>
+  Usage: sitemap-generator [options] <url>
 
   Options:
 
