@@ -72,7 +72,7 @@ c.on("fetcherror", function(item, response) {
 
 c.on("complete", function() {
     if (chunk.length === 0) {
-        return console.log(chalk.red.bold("Error: Site '" + program.args[0] + "' could not be found."));
+        return console.error(chalk.red.bold("Error: Site '" + program.args[0] + "' could not be found."));
     }
 
     var xml = builder.create("urlset", { version: "1.0", encoding: "UTF-8" }).att("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9");
@@ -85,7 +85,7 @@ c.on("complete", function() {
 
     fs.writeFile(path + "/sitemap.xml", map, function(err) {
         if (err) {
-            return console.log(chalk.red.bold("Error:"), chalk.red.bold(err));
+            return console.error(chalk.red.bold("Error:"), chalk.red.bold(err));
         }
 
         console.log(chalk.white("Fetched %s sites, encountered %s errors."), chunk.length, c.queue.errors());
