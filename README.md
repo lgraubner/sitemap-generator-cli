@@ -1,5 +1,5 @@
-# Node Sitemap Generator
-Creates an XML-Sitemap by crawling a given site.
+# Node Sitemap Generator [![Build Status](https://travis-ci.org/lgraubner/node-sitemap-generator.svg)](https://travis-ci.org/lgraubner/node-sitemap-generator)
+> Creates an XML-Sitemap by crawling a given site.
 
 ![](http://lgraubner.github.io/node-sitemap-generator/sitemap_generator.gif)
 
