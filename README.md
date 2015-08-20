@@ -17,6 +17,10 @@ $ npm install -g sitemap-generator
 $ sitemap-generator [options] <url>
 ```
 
+The crawler will fetch all sites matching folder URLs and certain file extensions. You can include files with `-i ext` or ignore files with `-e ext`. Most of the common file types are already black listed. File types parsed by Google are not black listed.
+
+**Note**: Omit the URL protocol, the crawler will detect the right one.
+
 ### Options
 ```BASH
 $ sitemap-generator --help

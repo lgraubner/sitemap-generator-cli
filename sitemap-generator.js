@@ -71,7 +71,7 @@ c.on("fetcherror", function(item, response) {
 });
 
 c.on("complete", function() {
-    if (chunk.length === 0) {
+    if (_.isEmpty(chunk)) {
         console.error(chalk.red.bold("Error: Site '" + program.args[0] + "' could not be found."));
         process.exit(1);
     }
