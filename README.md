@@ -1,6 +1,6 @@
 # Node Sitemap Generator
 
-[![Build Status](https://travis-ci.org/lgraubner/node-sitemap-generator.svg)](https://travis-ci.org/lgraubner/node-sitemap-generator) [![npm version](https://badge.fury.io/js/sitemap-generator.svg)](https://www.npmjs.com/package/sitemap-generator)
+[![Travis](https://img.shields.io/travis/lgraubner/node-sitemap-generator.svg)](https://www.npmjs.com/package/sitemap-generator) [![David](https://img.shields.io/david/lgraubner/node-sitemap-generator.svg)](https://david-dm.org/lgraubner/node-sitemap-generator) [![npm](https://img.shields.io/npm/v/sitemap-generator.svg)](https://www.npmjs.com/package/sitemap-generator)
 
 > Creates an XML-Sitemap by crawling a given site.
 
