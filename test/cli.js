@@ -42,9 +42,54 @@ describe("$ sitemap-generator abc.xyz", function() {
 
     it("should not throw any errors", function() {
         _stderr.should.be.empty;
+        should.equal(_error, null);
     });
 
     it("should return success message", function() {
         _stdout.should.not.be.empty;
+    });
+});
+
+describe("$ sitemap-generator http://abc.xyz", function() {
+    this.timeout(10000);
+
+    var _error;
+    var _stdout;
+    var _stderr;
+
+    before(function(done) {
+        var cmd = exec("node sitemap-generator.js http://abc.xyz", function(error, stdout, stderr) {
+            _error = error;
+            _stdout = stdout;
+            _stderr = stderr;
+            done();
+        });
+    });
+
+    it("should remove protocol and not throw any errors", function() {
+        _stderr.should.be.empty;
+        should.equal(_error, null);
+    });
+});
+
+describe("$ sitemap-generator https://abc.xyz", function() {
+    this.timeout(10000);
+
+    var _error;
+    var _stdout;
+    var _stderr;
+
+    before(function(done) {
+        var cmd = exec("node sitemap-generator.js https://abc.xyz", function(error, stdout, stderr) {
+            _error = error;
+            _stdout = stdout;
+            _stderr = stderr;
+            done();
+        });
+    });
+
+    it("should remove protocol and not throw any errors", function() {
+        _stderr.should.be.empty;
+        should.equal(_error, null);
     });
 });

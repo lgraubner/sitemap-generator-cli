@@ -21,7 +21,9 @@ if (!program.args[0]) {
 }
 
 var chunk = [];
-var c = new Crawler(program.args[0]);
+
+var url = program.args[0].replace(/^(http:\/\/|https:\/\/)/, "");
+var c = new Crawler(url);
 
 c.initialPath = "/";
 c.initialPort = 80;
