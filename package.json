@@ -25,7 +25,8 @@
     "lodash": "^3.10.1",
     "xmlbuilder": "^2.6.4",
     "commander": "^2.8.1",
-    "chalk": "^1.1.1"
+    "chalk": "^1.1.1",
+    "url-parse": "^1.0.2"
   },
   "preferGlobal": true,
   "bin": {

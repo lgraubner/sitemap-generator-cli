@@ -6,6 +6,7 @@ var fs = require("fs");
 var builder = require("xmlbuilder");
 var program = require("commander");
 var chalk = require("chalk");
+var URL = require("url-parse");
 var pkg = require("./package.json");
 
 program.version(pkg.version)
@@ -22,12 +23,12 @@ if (!program.args[0]) {
 
 var chunk = [];
 
-var url = program.args[0].replace(/^(http:\/\/|https:\/\/)/, "");
-var c = new Crawler(url);
+var url = new URL(program.args[0]);
+var c = new Crawler(url.host);
 
 c.initialPath = "/";
 c.initialPort = 80;
-c.initialProtocol = "http";
+c.initialProtocol = url.protocol.replace(":", "") | "http";
 c.userAgent = "Node/Sitemap-Generator";
 
 if (!program.query) {
