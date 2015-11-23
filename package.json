@@ -47,6 +47,6 @@
     "mocha": "^2.3.4"
   },
   "scripts": {
-    "test": "mocha test"
+    "test": "sudo mocha test"
   }
 }
