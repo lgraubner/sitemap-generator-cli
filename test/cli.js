@@ -165,7 +165,7 @@ describe("$ sitemap-generator --query 127.0.0.1", function() {
 
     it("should include links with query parameters", function(done) {
         fs.readFile("./sitemap.xml", function(err, data) {
-            data.toString().should.contain("127.0.0.1/site/?foo=bar");
+            data.toString().should.contain("/site/?foo=bar");
             done();
         });
     });

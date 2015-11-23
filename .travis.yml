@@ -1,6 +1,4 @@
 language: node_js
-sudo: required
-script: sudo npm test
 node_js:
     - "5.1"
     - "5.0"
