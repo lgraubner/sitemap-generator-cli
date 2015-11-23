@@ -1,8 +1,8 @@
 # Node Sitemap Generator
 
-[![Travis](https://img.shields.io/travis/lgraubner/node-sitemap-generator.svg)](https://travis-ci.org/lgraubner/node-sitemap-generator) [![David](https://img.shields.io/david/lgraubner/node-sitemap-generator.svg)](https://david-dm.org/lgraubner/node-sitemap-generator) [![npm](https://img.shields.io/npm/v/sitemap-generator.svg)](https://www.npmjs.com/package/sitemap-generator)
+[![Travis](https://img.shields.io/travis/lgraubner/node-sitemap-generator.svg)](https://travis-ci.org/lgraubner/node-sitemap-generator) [![David](https://img.shields.io/david/lgraubner/node-sitemap-generator.svg)](https://david-dm.org/lgraubner/node-sitemap-generator) [![David Dev](https://img.shields.io/david/dev/lgraubner/node-sitemap-generator.svg)](https://david-dm.org/lgraubner/node-sitemap-generator#info=devDependencies) [![npm](https://img.shields.io/npm/v/sitemap-generator.svg)](https://www.npmjs.com/package/sitemap-generator)
 
-> Creates an XML-Sitemap by crawling a given site.
+> Create xml sitemaps from the command line.
 
 ![](sitemap-generator.gif)
 
@@ -17,11 +17,13 @@ $ npm install -g sitemap-generator
 $ sitemap-generator [options] <url>
 ```
 
-The crawler will fetch all sites matching folder URLs and certain file extensions. You can include files with `-i ext` or ignore files with `-e ext`. Most of the common file types are already black listed. File types parsed by Google are not black listed.
+The crawler will fetch all sites matching folder URLs and file types [parsed by Google](https://support.google.com/webmasters/answer/35287?hl=en). If present the `robots.txt` will be taken into account and possible rules are applied for any URL to consider if it should be added to the sitemap.
 
-**Tip**: Omit the URL protocol, the crawler will detect the right one.
+***Tip***: Omit the URL protocol, the crawler will detect the right one.
 
-### Options
+**Important**: Executing the sitemap-generator with sites using HTML `base`-tag will not work in most cases as it is not parsed by the crawler.
+
+## Options
 ```BASH
 $ sitemap-generator --help
 
@@ -29,12 +31,37 @@ $ sitemap-generator --help
 
   Options:
 
-    -h, --help                output usage information
-    -V, --version             output the version number
-    -q, --query               consider query string
-    -i, --include [ext,ext2]  include fetched links by file extension, comma seperated
-    -e, --exclude [ext,ext2]  exclude fetched links by file extension, comma seperated
-    -o, --output [path]       specify output path
+    -h, --help                 output usage information
+    -V, --version              output the version number
+    -q, --query                consider query string
+    -f, --filename [filename]  sets output filename
+    -p, --path [path]          specifies output path
 ```
 
-**Important**: Executing the sitemap-generator with sites using HTML `base`-tag along with links *without* leading slashes will probably not work.
+### query
+
+Consider URLs with query strings like `http://www.example.com/?foo=bar` as indiviual sites and add them to the sitemap.
+
+```BASH
+$ sitemap-generator --query example.com
+```
+
+### filename
+
+Default: sitemap
+
+Specify an alternate filename for the XML output file. The `.xml` file extension is optional, it will be added automatically.
+
+```BASH
+$ sitemap-generator --filename=sitemap-foo example.com
+```
+
+### path
+
+Default: .
+
+Specify an alternate output path for the generated sitemap. Default is the current working directory.
+
+```BASH
+$ sitemap-generator --path=../foo/bar example.com
+```
