@@ -1,6 +1,6 @@
 {
   "name": "sitemap-generator",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Create xml sitemaps from the command line.",
   "homepage": "https://github.com/lgraubner/node-sitemap-generator",
   "author": {
@@ -36,7 +36,7 @@
   },
   "preferGlobal": true,
   "engines": {
-    "node": ">=0.12"
+    "node": ">=4.0"
   },
   "bin": {
     "sitemap-generator": "./lib/SitemapGenerator.js"
