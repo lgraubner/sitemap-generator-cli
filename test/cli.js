@@ -119,6 +119,8 @@ describe("$ sitemap-generator http://127.0.0.1/foo/bar", function() {
 
 describe("$ sitemap-generator --filename=test 127.0.0.1", function() {
 
+    this.timeout(10000);
+
     var _error;
     var _stdout;
     var _stderr;
