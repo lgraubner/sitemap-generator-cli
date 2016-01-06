@@ -1,6 +1,6 @@
 {
   "name": "sitemap-generator",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "description": "Create xml sitemaps from the command line.",
   "homepage": "https://github.com/lgraubner/node-sitemap-generator",
   "author": {
@@ -16,7 +16,7 @@
     "seo",
     "google"
   ],
-  "main": "lib/SitemapGenerator.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/lgraubner/node-sitemap-generator.git"
@@ -27,7 +27,7 @@
   "dependencies": {
     "simplecrawler": "^0.5.4",
     "lodash": "^3.10.1",
-    "xmlbuilder": "^4.1.0",
+    "xmlbuilder": "^4.2.0",
     "commander": "^2.9.0",
     "chalk": "^1.1.1",
     "url-parse": "^1.0.5",
@@ -36,17 +36,19 @@
   },
   "preferGlobal": true,
   "engines": {
-    "node": ">=4.0"
+    "node": ">=0.12"
   },
   "bin": {
-    "sitemap-generator": "./lib/SitemapGenerator.js"
+    "sitemap-generator": "index.js"
   },
   "license": "MIT",
   "devDependencies": {
     "chai": "^3.4.1",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^3.0.0",
     "mocha": "^2.3.4"
   },
   "scripts": {
-    "test": "NODE_ENV=development mocha test"
+    "test": "eslint index.js lib/** && NODE_ENV=development mocha test"
   }
 }
