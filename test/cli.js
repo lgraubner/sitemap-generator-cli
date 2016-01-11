@@ -14,11 +14,11 @@ describe('$ sitemap-generator invalid', function () {
 
   before(function (done) {
     fs.stat('./sitemap.xml', function (err) {
-      if (err && err.code !== 'ENOENT') {
+      if (!err && err.code !== 'ENOENT') {
         fs.unlink('./sitemap.xml');
       }
     });
-    exec('node ./index.js illegal', function cmd(error, stdout, stderr) {
+    exec('node ./cli.js illegal', function cmd(error, stdout, stderr) {
       _error = error;
       _stderr = stderr;
       done();
@@ -52,7 +52,7 @@ describe('$ sitemap-generator 127.0.0.1', function () {
   });
 
   before(function (done) {
-    exec('node ./index.js 127.0.0.1', function cmd(error, stdout, stderr) {
+    exec('node ./cli.js 127.0.0.1', function cmd(error, stdout, stderr) {
       _error = error;
       _stdout = stdout;
       _stderr = stderr;
@@ -102,7 +102,7 @@ describe('$ sitemap-generator http://127.0.0.1/foo/bar', function () {
   });
 
   before(function (done) {
-    exec('node ./index.js http://127.0.0.1', function cmd(error, stdout, stderr) {
+    exec('node ./cli.js http://127.0.0.1', function cmd(error, stdout, stderr) {
       _error = error;
       _stderr = stderr;
       done();
@@ -123,7 +123,7 @@ describe('$ sitemap-generator --filename=test 127.0.0.1', function () {
   });
 
   before(function (done) {
-    exec('node ./index.js --filename=test 127.0.0.1', function () {
+    exec('node ./cli.js --filename=test 127.0.0.1', function () {
       done();
     });
   });
@@ -142,7 +142,7 @@ describe('$ sitemap-generator --query 127.0.0.1', function () {
   });
 
   before(function (done) {
-    exec('node ./index.js --query 127.0.0.1', function cmd() {
+    exec('node ./cli.js --query 127.0.0.1', function cmd() {
       done();
     });
   });
@@ -164,7 +164,7 @@ describe('$ sitemap-generator --path=./tmp 127.0.0.1', function () {
   before(function (done) {
     fs.mkdir('./tmp');
 
-    exec('node ./index.js --path=./tmp 127.0.0.1', function cmd() {
+    exec('node ./cli.js --path=./tmp 127.0.0.1', function cmd() {
       done();
     });
   });

@@ -6,7 +6,7 @@ var program = require('commander');
 var SitemapGenerator = require('./lib/SitemapGenerator.js');
 var pkg = require('./package.json');
 
-var gen;
+var generator;
 
 program.version(pkg.version)
   .usage('[options] <url>')
@@ -20,5 +20,10 @@ if (!program.args[0]) {
   process.exit();
 }
 
-gen = new SitemapGenerator(program.args[0]);
-gen.start();
+generator = new SitemapGenerator({
+  url: program.args[0],
+  query: program.query,
+  path: program.path,
+  filename: program.filename,
+});
+generator.start();
