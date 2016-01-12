@@ -9,7 +9,7 @@
 ## Installation
 
 ```BASH
-$ npm install -g sitemap-generator
+$ npm install -g sitemap-generator-cli
 ```
 
 ## Usage
