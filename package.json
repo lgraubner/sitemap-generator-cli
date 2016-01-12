@@ -1,8 +1,8 @@
 {
-  "name": "sitemap-generator",
+  "name": "sitemap-generator-cli",
   "version": "3.1.1",
   "description": "Create xml sitemaps from the command line.",
-  "homepage": "https://github.com/lgraubner/node-sitemap-generator",
+  "homepage": "https://github.com/lgraubner/node-sitemap-generator-cli",
   "author": {
     "name": "Lars Graubner",
     "email": "mail@larsgraubner.de",
@@ -20,10 +20,10 @@
   "main": "cli.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lgraubner/node-sitemap-generator.git"
+    "url": "https://github.com/lgraubner/node-sitemap-generator-cli.git"
   },
   "bugs": {
-    "url": "https://github.com/lgraubner/node-sitemap-generator/issues"
+    "url": "https://github.com/lgraubner/node-sitemap-generator-cli/issues"
   },
   "dependencies": {
     "simplecrawler": "^0.5.4",
