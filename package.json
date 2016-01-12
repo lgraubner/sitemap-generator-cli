@@ -50,6 +50,6 @@
     "mocha": "^2.3.4"
   },
   "scripts": {
-    "test": "eslint index.js lib/** && NODE_ENV=development mocha test"
+    "test": "eslint cli.js lib/** && NODE_ENV=development mocha test"
   }
 }
