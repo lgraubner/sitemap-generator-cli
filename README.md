@@ -1,6 +1,6 @@
 # Node Sitemap Generator
 
-[![Travis](https://img.shields.io/travis/lgraubner/node-sitemap-generator.svg)](https://travis-ci.org/lgraubner/node-sitemap-generator) [![David](https://img.shields.io/david/lgraubner/node-sitemap-generator.svg)](https://david-dm.org/lgraubner/node-sitemap-generator) [![David Dev](https://img.shields.io/david/dev/lgraubner/node-sitemap-generator.svg)](https://david-dm.org/lgraubner/node-sitemap-generator#info=devDependencies) [![npm](https://img.shields.io/npm/v/sitemap-generator.svg)](https://www.npmjs.com/package/sitemap-generator)
+[![Travis](https://img.shields.io/travis/lgraubner/node-sitemap-generator-cli.svg)](https://travis-ci.org/lgraubner/node-sitemap-generator-cli) [![David](https://img.shields.io/david/lgraubner/node-sitemap-generator-cli.svg)](https://david-dm.org/lgraubner/node-sitemap-generator-cli) [![David Dev](https://img.shields.io/david/dev/lgraubner/node-sitemap-generator-cli.svg)](https://david-dm.org/lgraubner/node-sitemap-generator-cli#info=devDependencies) [![npm](https://img.shields.io/npm/v/sitemap-generator-cli.svg)](https://www.npmjs.com/package/sitemap-generator-cli)
 
 > Create xml sitemaps from the command line.
 
