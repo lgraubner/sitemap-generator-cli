@@ -36,32 +36,45 @@ $ sitemap-generator --help
     -q, --query                consider query string
     -f, --filename [filename]  sets output filename
     -p, --path [path]          specifies output path
+    -s, --silent               omit crawler notifications
 ```
 
 ### query
 
+Default: `false`
+
 Consider URLs with query strings like `http://www.example.com/?foo=bar` as indiviual sites and add them to the sitemap.
 
 ```BASH
-$ sitemap-generator --query example.com
+$ sitemap-generator -q example.com
 ```
 
 ### filename
 
-Default: sitemap
+Default: `sitemap`
 
 Specify an alternate filename for the XML output file. The `.xml` file extension is optional, it will be added automatically.
 
 ```BASH
-$ sitemap-generator --filename=sitemap-foo example.com
+$ sitemap-generator --filename="sitemap-foo" example.com
 ```
 
 ### path
 
-Default: .
+Default: `.`
 
 Specify an alternate output path for the generated sitemap. Default is the current working directory.
 
 ```BASH
-$ sitemap-generator --path=../foo/bar example.com
+$ sitemap-generator --path="../foo/bar" example.com
+```
+
+### silent
+
+Default: `false`
+
+Omit the crawler notifications of found or not found sites.
+
+```BASH
+$ sitemap-generator -s example.com
 ```
