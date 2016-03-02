@@ -13,6 +13,7 @@ program.version(pkg.version)
   .option('-q, --query', 'consider query string')
   .option('-f, --filename [filename]', 'sets output filename')
   .option('-p, --path [path]', 'specifies output path')
+  .option('-s, --silent', 'omit crawler notifications')
   .parse(process.argv);
 
 if (!program.args[0]) {
@@ -25,5 +26,6 @@ generator = new SitemapGenerator({
   query: program.query,
   path: program.path,
   filename: program.filename,
+  silent: program.silent,
 });
 generator.start();

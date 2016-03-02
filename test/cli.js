@@ -91,6 +91,20 @@ describe('$ sitemap-generator 127.0.0.1', function () {
       done();
     });
   });
+
+  it('should ignore script URLs', function (done) {
+    fs.readFile('./sitemap.xml', function (err, data) {
+      data.toString().should.not.contain('127.0.0.1/ignore-scripts');
+      done();
+    });
+  });
+
+  it('should ignore HTML comment URLs', function (done) {
+    fs.readFile('./sitemap.xml', function (err, data) {
+      data.toString().should.not.contain('127.0.0.1/ignore-comments');
+      done();
+    });
+  });
 });
 
 describe('$ sitemap-generator http://127.0.0.1/foo/bar', function () {

@@ -1,3 +1,4 @@
+/* eslint-disable */
 var http = require('http');
 
 module.exports = {
@@ -7,7 +8,7 @@ module.exports = {
       http.STATUS_CODES[200], {
         'Content-Type': 'text/html',
       });
-    res.write('<a href=\'/site\'>Link 1</a><a href=\'/ignore\'>Link 2</a>');
+    res.write('<a href=\'/site\'>Link 1</a><!--<a href="/ignore-comments">Link</a>--><a href=\'/ignore\'>Link 2</a><script>var a = "/ignore-scripts";</script>');
     res.end();
   },
 
