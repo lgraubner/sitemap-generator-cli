@@ -32,6 +32,7 @@
     "commander": "^2.9.0",
     "chalk": "^1.1.1",
     "url-parse": "^1.0.5",
+    "robots-parser": "^1.0.0",
     "request": "^2.69.0"
   },
   "preferGlobal": true,
