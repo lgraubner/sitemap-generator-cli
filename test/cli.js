@@ -190,3 +190,24 @@ describe('$ sitemap-generator --path=./tmp 127.0.0.1', function () {
     });
   });
 });
+
+describe('$ sitemap-generator --baseurl http://127.0.0.1/site', function () {
+  after(function () {
+    fs.unlink('./sitemap.xml');
+  });
+
+  before(function (done) {
+    exec('node ./cli.js --baseurl http://127.0.0.1/site', function cmd() {
+      done();
+    });
+  });
+
+  it('should include links with query parameters', function (done) {
+    fs.readFile('./sitemap.xml', function (err, data) {
+      data.toString().should.contain('/site');
+      data.toString().should.contain('/site/2');
+      data.toString().should.not.contain('/ignore');
+      done();
+    });
+  });
+});
