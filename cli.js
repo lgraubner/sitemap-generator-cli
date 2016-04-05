@@ -10,6 +10,7 @@ var generator;
 
 program.version(pkg.version)
   .usage('[options] <url>')
+  .option('-b, --baseurl', 'only allow URLs which match given <url>')
   .option('-q, --query', 'consider query string')
   .option('-f, --filename [filename]', 'sets output filename')
   .option('-p, --path [path]', 'specifies output path')
@@ -23,6 +24,7 @@ if (!program.args[0]) {
 
 generator = new SitemapGenerator({
   url: program.args[0],
+  baseurl: program.baseurl,
   query: program.query,
   path: program.path,
   filename: program.filename,
