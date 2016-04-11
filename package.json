@@ -32,7 +32,7 @@
     "lodash": "^4.9.0",
     "simplecrawler": "^0.6.2",
     "url-parse": "^1.1.1",
-    "xmlbuilder": "^8.2.8"
+    "xmlbuilder": "^8.2.2"
   },
   "preferGlobal": true,
   "engines": {
