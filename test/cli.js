@@ -14,7 +14,7 @@ describe('$ sitemap-generator invalid', function () {
 
   before(function (done) {
     fs.stat('./sitemap.xml', function (err) {
-      if (!err && err.code !== 'ENOENT') {
+      if (err !== null && err.code !== 'ENOENT') {
         fs.unlink('./sitemap.xml');
       }
     });
