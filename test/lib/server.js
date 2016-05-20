@@ -4,7 +4,7 @@
 var http = require('http');
 var routes = require('./routes');
 
-http.createServer(function server(req, res) {
+this.server = http.createServer(function (req, res) {
   if (routes[req.url] && typeof routes[req.url] === 'function') {
     routes[req.url](req, res);
   } else {
@@ -12,4 +12,12 @@ http.createServer(function server(req, res) {
     res.write('Page not found.');
     res.end();
   }
-}).listen(8000, '127.0.0.1');
+});
+
+exports.listen = function () {
+  this.server.listen.apply(this.server, arguments);
+};
+
+exports.close = function (callback) {
+  this.server.close(callback);
+};

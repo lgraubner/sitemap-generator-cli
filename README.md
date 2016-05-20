@@ -1,10 +1,8 @@
 # Node Sitemap Generator
 
-[![Travis](https://img.shields.io/travis/lgraubner/node-sitemap-generator-cli.svg)](https://travis-ci.org/lgraubner/node-sitemap-generator-cli) [![David](https://img.shields.io/david/lgraubner/node-sitemap-generator-cli.svg)](https://david-dm.org/lgraubner/node-sitemap-generator-cli) [![David Dev](https://img.shields.io/david/dev/lgraubner/node-sitemap-generator-cli.svg)](https://david-dm.org/lgraubner/node-sitemap-generator-cli#info=devDependencies) [![npm](https://img.shields.io/npm/v/sitemap-generator-cli.svg)](https://www.npmjs.com/package/sitemap-generator-cli)
+[![Travis](https://img.shields.io/travis/lgraubner/sitemap-generator-cli.svg)](https://travis-ci.org/lgraubner/sitemap-generator-cli) [![David](https://img.shields.io/david/lgraubner/sitemap-generator-cli.svg)](https://david-dm.org/lgraubner/sitemap-generator-cli) [![David Dev](https://img.shields.io/david/dev/lgraubner/sitemap-generator-cli.svg)](https://david-dm.org/lgraubner/sitemap-generator-cli#info=devDependencies) [![npm](https://img.shields.io/npm/v/sitemap-generator-cli.svg)](https://www.npmjs.com/package/sitemap-generator-cli)
 
 > Create xml sitemaps from the command line.
-
-![](sitemap-generator.gif)
 
 ## Installation
 
@@ -17,11 +15,21 @@ $ npm install -g sitemap-generator-cli
 $ sitemap-generator [options] <url>
 ```
 
-The crawler will fetch all sites matching folder URLs and file types [parsed by Google](https://support.google.com/webmasters/answer/35287?hl=en). If present the `robots.txt` will be taken into account and possible rules are applied for any URL to consider if it should be added to the sitemap.
+The protocol can be omitted, if the domain uses `http` or redirects to `https` are set up.
 
-***Tip***: Omit the URL protocol, the crawler will detect the right one.
+The crawler will fetch all folder URL pages and file types [parsed by Google](https://support.google.com/webmasters/answer/35287?hl=en). If present the `robots.txt` will be taken into account and possible rules are applied for each URL to consider if it should be added to the sitemap. Also the crawler will not fetch URL's from a page if the robots meta tag with the value `nofollow` is present. The crawler is able to apply the `base` value to found links.
 
-**Important**: Executing the sitemap-generator with sites using HTML `base`-tag will not work in most cases as it is not parsed by the crawler.
+When the crawler finished the XML Sitemap will be built and printed directly to your console. Pass the sitemap to save the sitemap as a file or do something else:
+
+```BASH
+$ sitemap-generator example.com > sitemap.xml
+```
+
+To save it in a subfolder simply provide a relativ path. You can pick any filename you want.
+
+```BASH
+$ sitemap-generator example.com > ./subfolder/mysitemap.xml
+```
 
 ## Options
 ```BASH
@@ -33,48 +41,33 @@ $ sitemap-generator --help
 
     -h, --help                 output usage information
     -V, --version              output the version number
+    -b, --baseurl              only allow URLs which match given <url>
+    -d, --debug                show crawler fetch status messages to debug
     -q, --query                consider query string
-    -f, --filename [filename]  sets output filename
-    -p, --path [path]          specifies output path
-    -s, --silent               omit crawler notifications
 ```
 
-### query
+Example:
+
+```Bash
+// strictly match given path and consider query string
+$ sitemap-generator -bq example.com/foo/
+```
+
+###  `--baseurl`
+
+Default: `false`
+
+If you specify an URL with a path (e.g. `example.com/foo/`) and this option is set to `true` the crawler will only fetch URL's matching `example.com/foo/*`. Otherwise it could also fetch `example.com` in case a link to this URL is provided
+
+### `--debug`
+
+Default: `false`
+
+Use this option to debug the sitemap generation process and see which sites are fetched and if there are any errors.
+Will not create a sitemap!
+
+### `--query`
 
 Default: `false`
 
 Consider URLs with query strings like `http://www.example.com/?foo=bar` as indiviual sites and add them to the sitemap.
-
-```BASH
-$ sitemap-generator -q example.com
-```
-
-### filename
-
-Default: `sitemap`
-
-Specify an alternate filename for the XML output file. The `.xml` file extension is optional, it will be added automatically.
-
-```BASH
-$ sitemap-generator --filename="sitemap-foo" example.com
-```
-
-### path
-
-Default: `.`
-
-Specify an alternate output path for the generated sitemap. Default is the current working directory.
-
-```BASH
-$ sitemap-generator --path="../foo/bar" example.com
-```
-
-### silent
-
-Default: `false`
-
-Omit the crawler notifications of found or not found sites.
-
-```BASH
-$ sitemap-generator -s example.com
-```

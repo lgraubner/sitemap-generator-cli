@@ -1,213 +1,92 @@
-/* globals it:false, before:false, describe:false */
-/* eslint no-unused-expressions: 0 */
-/* eslint-env node, mocha */
-
-var should = require('chai').should();
+/* eslint no-unused-vars:0 */
+var test = require('ava');
+var port = require('./lib/constants').port;
+var localhost = require('./lib/constants').localhost;
+// test server
+var server = require('./lib/server');
 var exec = require('child_process').exec;
-var fs = require('fs');
 
-require('./lib/testserver.js');
-
-describe('$ sitemap-generator invalid', function () {
-  var _error;
-  var _stderr;
-
-  before(function (done) {
-    fs.stat('./sitemap.xml', function (err) {
-      if (err !== null && err.code !== 'ENOENT') {
-        fs.unlink('./sitemap.xml');
-      }
-    });
-    exec('node ./cli.js illegal', function cmd(error, stdout, stderr) {
-      _error = error;
-      _stderr = stderr;
-      done();
-    });
-  });
-
-  it('should fail because of invalid url', function () {
-    _stderr.should.not.be.empty;
-  });
-
-  it('should exit with error code "1"', function () {
-    _error.code.should.equal(1);
-  });
-
-  it('should not create an xml file', function (done) {
-    fs.stat('./sitemap.xml', function (err) {
-      err.code.should.equal('ENOENT');
-      done();
-    });
+// start testserver
+test.cb.before(function (t) {
+  server.listen(port, localhost, function () {
+    t.end();
   });
 });
 
-describe('$ sitemap-generator 127.0.0.1', function () {
-  var _error;
-  var _stdout;
-  var _stderr;
-  this.timeout(10000);
+test.cb('should return null for invalid URL\'s', function (t) {
+  t.plan(3);
 
-  after(function () {
-    fs.unlink('./sitemap.xml');
-  });
+  exec('node ../cli.js invalid', function (error, stdout, stderr) {
+    t.is(error, null, 'no error');
+    t.is(stderr, '');
+    t.regex(stdout, /^null/);
 
-  before(function (done) {
-    exec('node ./cli.js 127.0.0.1', function cmd(error, stdout, stderr) {
-      _error = error;
-      _stdout = stdout;
-      _stderr = stderr;
-      done();
-    });
-  });
-
-  it('should not throw any errors', function () {
-    _stderr.should.be.empty;
-    should.equal(_error, null);
-  });
-
-  it('should return success message', function () {
-    _stdout.should.not.be.empty;
-  });
-
-  it('should create an xml file', function (done) {
-    fs.stat('./sitemap.xml', function (err) {
-      should.equal(err, null);
-      done();
-    });
-  });
-
-  it('should contain xml markup', function (done) {
-    fs.readFile('./sitemap.xml', function (err, data) {
-      var content = data.toString();
-      content.should.contain('<?xml version="1.0" encoding="UTF-8"?>');
-      content.should.match(/<url>(\s|\S)*?<loc>\S+?<\/loc>(\s|\S)*?<\/url>/);
-      done();
-    });
-  });
-
-  it('should take robots.txt into account', function (done) {
-    fs.readFile('./sitemap.xml', function (err, data) {
-      data.toString().should.not.contain('127.0.0.1/ignore');
-      done();
-    });
-  });
-
-  it('should ignore script URLs', function (done) {
-    fs.readFile('./sitemap.xml', function (err, data) {
-      data.toString().should.not.contain('127.0.0.1/ignore-scripts');
-      done();
-    });
-  });
-
-  it('should ignore HTML comment URLs', function (done) {
-    fs.readFile('./sitemap.xml', function (err, data) {
-      data.toString().should.not.contain('127.0.0.1/ignore-comments');
-      done();
-    });
+    t.end();
   });
 });
 
-describe('$ sitemap-generator http://127.0.0.1/foo/bar', function () {
-  var _error;
-  var _stderr;
+test.cb('should return valid sitemap', function (t) {
+  t.plan(6);
 
-  after(function () {
-    fs.unlink('./sitemap.xml');
-  });
+  exec('node ../cli.js ' + localhost, function (error, stdout, stderr) {
+    t.is(error, null, 'no error');
+    t.is(stderr, '', 'no error messages');
+    // sitemap
+    t.regex(stdout, /^<\?xml version="1.0" encoding="UTF-8"\?>/, 'has xml header');
+    var urlsRegex = /<urlset xmlns=".+?">(.|\n)+<\/urlset>/;
+    t.regex(stdout, urlsRegex, 'has urlset property');
+    t.is(stdout.match(/<url>(.|\n)+?<\/url>/g).length, 1, 'contains url properties');
+    t.is(stdout.match(/<loc>(.|\n)+?<\/loc>/g).length, 1, 'contains loc properties');
 
-  before(function (done) {
-    exec('node ./cli.js http://127.0.0.1', function cmd(error, stdout, stderr) {
-      _error = error;
-      _stderr = stderr;
-      done();
-    });
-  });
-
-  it('should ignore protocol and path', function () {
-    _stderr.should.be.empty;
-    should.equal(_error, null);
+    t.end();
   });
 });
 
-describe('$ sitemap-generator --filename=test 127.0.0.1', function () {
-  this.timeout(10000);
+test.cb('should restrict crawler to baseurl if option is enabled', function (t) {
+  t.plan(3);
 
-  after(function () {
-    fs.unlink('./test.xml');
-  });
+  exec('node ../cli.js ' + localhost + '/subpage --baseurl', function (error, stdout, stderr) {
+    t.is(error, null, 'no error');
+    t.is(stderr, '', 'no error messages');
+    var regex = new RegExp('http:\/\/' + localhost + ':' + port + '/<');
+    t.falsy(regex.test(stdout), 'index page is not included in sitemap');
 
-  before(function (done) {
-    exec('node ./cli.js --filename=test 127.0.0.1', function () {
-      done();
-    });
-  });
-
-  it('should create an xml file with the correct name', function (done) {
-    fs.stat('./test.xml', function (err) {
-      should.equal(err, null);
-      done();
-    });
+    t.end();
   });
 });
 
-describe('$ sitemap-generator --query 127.0.0.1', function () {
-  after(function () {
-    fs.unlink('./sitemap.xml');
-  });
+test.cb('should include query strings if enabled', function (t) {
+  t.plan(5);
 
-  before(function (done) {
-    exec('node ./cli.js --query 127.0.0.1', function cmd() {
-      done();
-    });
-  });
+  exec('node ../cli.js ' + localhost + ' --query', function (error, stdout, stderr) {
+    t.is(error, null, 'no error');
+    t.is(stderr, '', 'no error messages');
+    t.not(stdout, '', 'stdout is not empty');
+    t.regex(stdout, /[^<\?xml version="1.0" encoding="UTF\-8"\?>]/, 'does not print xml sitemap');
 
-  it('should include links with query parameters', function (done) {
-    fs.readFile('./sitemap.xml', function (err, data) {
-      data.toString().should.contain('/site/?foo=bar');
-      done();
-    });
+    var regex = new RegExp('/?querypage');
+    t.truthy(regex.test(stdout), 'query page included');
+
+    t.end();
   });
 });
 
-describe('$ sitemap-generator --path=./tmp 127.0.0.1', function () {
-  after(function () {
-    fs.unlink('./tmp/sitemap.xml');
-    fs.rmdir('./tmp');
-  });
+test.cb('should log requests if debug mode is enabled', function (t) {
+  t.plan(4);
 
-  before(function (done) {
-    fs.mkdir('./tmp');
+  exec('node ../cli.js ' + localhost + ' --debug', function (error, stdout, stderr) {
+    t.is(error, null, 'no error');
+    t.is(stderr, '', 'no error messages');
+    t.not(stdout, '', 'stdout is not empty');
+    t.regex(stdout, /[^<\?xml version="1.0" encoding="UTF\-8"\?>]/, 'does not print xml sitemap');
 
-    exec('node ./cli.js --path=./tmp 127.0.0.1', function cmd() {
-      done();
-    });
-  });
-
-  it('should create xml file in given path', function (done) {
-    fs.stat('./tmp/sitemap.xml', function (err) {
-      should.equal(err, null);
-      done();
-    });
+    t.end();
   });
 });
 
-describe('$ sitemap-generator --baseurl http://127.0.0.1/site', function () {
-  after(function () {
-    fs.unlink('./sitemap.xml');
-  });
-
-  before(function (done) {
-    exec('node ./cli.js --baseurl http://127.0.0.1/site', function cmd() {
-      done();
-    });
-  });
-
-  it('should include links with query parameters', function (done) {
-    fs.readFile('./sitemap.xml', function (err, data) {
-      data.toString().should.contain('/site');
-      data.toString().should.contain('/site/2');
-      data.toString().should.not.contain('/ignore');
-      done();
-    });
+test.cb.after(function (t) {
+  // stop test server
+  server.close(function () {
+    t.end();
   });
 });
