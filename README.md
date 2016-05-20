@@ -39,11 +39,11 @@ $ sitemap-generator --help
 
   Options:
 
-    -h, --help                 output usage information
-    -V, --version              output the version number
-    -b, --baseurl              only allow URLs which match given <url>
-    -d, --debug                show crawler fetch status messages to debug
-    -q, --query                consider query string
+    -h, --help             output usage information
+    -V, --version          output the version number
+    -b, --baseurl          only allow URLs which match given <url>
+    -d, --dry              show status messages without generating a sitemap
+    -q, --query            consider query string
 ```
 
 Example:
@@ -59,11 +59,11 @@ Default: `false`
 
 If you specify an URL with a path (e.g. `example.com/foo/`) and this option is set to `true` the crawler will only fetch URL's matching `example.com/foo/*`. Otherwise it could also fetch `example.com` in case a link to this URL is provided
 
-### `--debug`
+### `--dry`
 
 Default: `false`
 
-Use this option to debug the sitemap generation process and see which sites are fetched and if there are any errors.
+Use this option to make a dry run and check the generation process to see which sites are fetched and if there are any errors.
 Will not create a sitemap!
 
 ### `--query`

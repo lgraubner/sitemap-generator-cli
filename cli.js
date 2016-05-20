@@ -10,7 +10,7 @@ var chalk = require('chalk');
 program.version(pkg.version)
   .usage('[options] <url>')
   .option('-b, --baseurl', 'only allow URLs which match given <url>')
-  .option('-d, --debug', 'show crawler fetch status messages to debug')
+  .option('-d, --dry', 'show status messages without generating a sitemap')
   .option('-q, --query', 'consider query string')
   .parse(process.argv);
 
@@ -27,8 +27,8 @@ var generator = new SitemapGenerator(program.args[0], {
   port: (process.env.NODE_ENV === 'development' ? 5173 : 80),
 });
 
-// add event listeners to crawler if debug mode enabled
-if (program.debug) {
+// add event listeners to crawler if dry mode enabled
+if (program.dry) {
   // fetch status
   generator.on('fetch', function (status, url) {
     var color = 'green';
@@ -52,8 +52,8 @@ if (program.debug) {
 
 // crawling done
 generator.on('done', function (sitemap, store) {
-  // show stats if debug mode
-  if (program.debug) {
+  // show stats if dry mode
+  if (program.dry) {
     var message = 'Added %s pages, ignored %s pages, encountered %s errors.';
     var stats = [
       chalk.white(message),

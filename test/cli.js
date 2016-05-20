@@ -71,10 +71,10 @@ test.cb('should include query strings if enabled', function (t) {
   });
 });
 
-test.cb('should log requests if debug mode is enabled', function (t) {
+test.cb('should log requests if dry mode is enabled', function (t) {
   t.plan(4);
 
-  exec('node ../cli.js ' + localhost + ' --debug', function (error, stdout, stderr) {
+  exec('node ../cli.js ' + localhost + ' --dry', function (error, stdout, stderr) {
     t.is(error, null, 'no error');
     t.is(stderr, '', 'no error messages');
     t.not(stdout, '', 'stdout is not empty');
