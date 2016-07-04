@@ -15,20 +15,18 @@ $ npm install -g sitemap-generator-cli
 $ sitemap-generator [options] <url>
 ```
 
-The protocol can be omitted, if the domain uses `http` or redirects to `https` are set up.
-
-The crawler will fetch all folder URL pages and file types [parsed by Google](https://support.google.com/webmasters/answer/35287?hl=en). If present the `robots.txt` will be taken into account and possible rules are applied for each URL to consider if it should be added to the sitemap. Also the crawler will not fetch URL's from a page if the robots meta tag with the value `nofollow` is present. The crawler is able to apply the `base` value to found links.
+The crawler will fetch all folder URL pages and file types [parsed by Google](https://support.google.com/webmasters/answer/35287?hl=en). If present the `robots.txt` will be taken into account and possible rules are applied for each URL to consider if it should be added to the sitemap. Also the crawler will not fetch URL's from a page if the robots meta tag with the value `nofollow` is present and ignore them completely if `noindex` rule is present. The crawler is able to apply the `base` value to found links.
 
 When the crawler finished the XML Sitemap will be built and printed directly to your console. Pass the sitemap to save the sitemap as a file or do something else:
 
 ```BASH
-$ sitemap-generator example.com > sitemap.xml
+$ sitemap-generator http://example.com > sitemap.xml
 ```
 
 To save it in a subfolder simply provide a relativ path. You can pick any filename you want.
 
 ```BASH
-$ sitemap-generator example.com > ./subfolder/mysitemap.xml
+$ sitemap-generator http://example.com > ./subfolder/mysitemap.xml
 ```
 
 ## Options
@@ -57,7 +55,7 @@ $ sitemap-generator -bq example.com/foo/
 
 Default: `false`
 
-If you specify an URL with a path (e.g. `example.com/foo/`) and this option is set to `true` the crawler will only fetch URL's matching `example.com/foo/*`. Otherwise it could also fetch `example.com` in case a link to this URL is provided
+If you specify an URL with a path (e.g. `http://example.com/foo/`) and this option is set to `true` the crawler will only fetch URL's matching `example.com/foo/*`. Otherwise it could also fetch `example.com` in case a link to this URL is provided
 
 ### `--dry`
 
