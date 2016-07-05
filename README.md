@@ -20,13 +20,7 @@ The crawler will fetch all folder URL pages and file types [parsed by Google](ht
 When the crawler finished the XML Sitemap will be built and printed directly to your console. Pass the sitemap to save the sitemap as a file or do something else:
 
 ```BASH
-$ sitemap-generator http://example.com > sitemap.xml
-```
-
-To save it in a subfolder simply provide a relativ path. You can pick any filename you want.
-
-```BASH
-$ sitemap-generator http://example.com > ./subfolder/mysitemap.xml
+$ sitemap-generator http://example.com > some/path/sitemap.xml
 ```
 
 ## Options
