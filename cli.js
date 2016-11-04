@@ -24,7 +24,6 @@ if (!program.args[0]) {
 var generator = new SitemapGenerator(program.args[0], {
   stripQuerystring: !program.query,
   restrictToBasepath: program.baseurl,
-  port: (process.env.NODE_ENV === 'development' ? 5173 : 80),
 });
 
 // add event listeners to crawler if dry mode enabled

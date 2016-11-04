@@ -1,6 +1,6 @@
 {
   "name": "sitemap-generator-cli",
-  "version": "4.1.0",
+  "version": "5.0.0",
   "description": "Create xml sitemaps from the command line.",
   "homepage": "https://github.com/lgraubner/sitemap-generator-cli",
   "author": {
@@ -29,18 +29,18 @@
   "dependencies": {
     "chalk": "^1.1.3",
     "commander": "^2.9.0",
-    "sitemap-generator": "^4.1.1"
+    "sitemap-generator": "^5.0.0"
   },
   "preferGlobal": true,
   "engines": {
-    "node": ">=0.12"
+    "node": ">=4"
   },
   "bin": {
     "sitemap-generator": "cli.js"
   },
   "license": "MIT",
   "devDependencies": {
-    "ava": "^0.15.2",
+    "ava": "^0.16.0",
     "eslint": "^3.0.0",
     "eslint-config-graubnla": "^3.0.0"
   },
