@@ -6,17 +6,24 @@ var program = require('commander');
 var SitemapGenerator = require('sitemap-generator');
 var pkg = require('./package.json');
 var chalk = require('chalk');
+var path = require('path');
+var fs = require('fs');
 
 program.version(pkg.version)
-  .usage('[options] <url>')
+  .usage('[options] <url> <filepath>')
   .option('-b, --baseurl', 'only allow URLs which match given <url>')
-  .option('-d, --dry', 'show status messages without generating a sitemap')
   .option('-q, --query', 'consider query string')
+  .option('-v, --verbose', 'print details when crawling')
   .parse(process.argv);
 
 // display help if no url provided
-if (!program.args[0]) {
+if (program.args.length < 2) {
   program.help();
+  process.exit();
+}
+
+if (!/[a-zA-Z]\.xml$/.test(program.args[1])) {
+  console.error(chalk.red('Filepath should contain a filename ending with ".xml".'));
   process.exit();
 }
 
@@ -27,7 +34,7 @@ var generator = new SitemapGenerator(program.args[0], {
 });
 
 // add event listeners to crawler if dry mode enabled
-if (program.dry) {
+if (program.verbose) {
   // fetch status
   generator.on('fetch', function (status, url) {
     var color = 'green';
@@ -50,9 +57,9 @@ if (program.dry) {
 }
 
 // crawling done
-generator.on('done', function (sitemap, store) {
+generator.on('done', function (sitemaps, store) {
   // show stats if dry mode
-  if (program.dry) {
+  if (program.verbose) {
     var message = 'Added %s pages, ignored %s pages, encountered %s errors.';
     var stats = [
       chalk.white(message),
@@ -70,9 +77,22 @@ generator.on('done', function (sitemap, store) {
       // print stats
       console.log.apply(this, stats);
     }
+  }
+
+  if (sitemaps !== null) {
+    // save files to disk
+    sitemaps.map(function write(map, index) {
+      var filePath = path.resolve(program.args[1]);
+      if (index !== 0) {
+        filePath = filePath.replace(/(\.xml)$/, '_part' + index + '$1');
+      }
+
+      return fs.writeFileSync(filePath, map, function (err) {
+        if (err) throw err;
+      });
+    });
   } else {
-    // print sitemap
-    console.log(sitemap);
+    console.error(chalk.red('URL not found.'));
   }
 
   // exit
