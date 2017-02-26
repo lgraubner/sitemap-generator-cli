@@ -46,14 +46,16 @@ test.cb('should return valid sitemap', function (t) {
       t.is(error, null, 'no error');
       t.is(stderr, '', 'no error messages');
       // sitemap
-      var filePath = path.resolve('./sitemap_valid.xml');
+      var filePath = path.resolve('sitemap_valid.xml');
+
       t.truthy(fs.existsSync(filePath));
 
-      t.regex(fs.readFileSync(filePath), /^<\?xml version="1.0" encoding="UTF-8"\?>/);
+      var file = fs.readFileSync(filePath, 'utf-8');
+      t.regex(file, /^<\?xml version="1.0" encoding="UTF-8"\?>/);
       var urlsRegex = /<urlset xmlns=".+?">(.|\n)+<\/urlset>/;
-      t.regex(fs.readFileSync(filePath), urlsRegex, 'has urlset property');
-      t.regex(fs.readFileSync(filePath), /<url>(.|\n)+?<\/url>/g, 'contains url properties');
-      t.regex(fs.readFileSync(filePath), /<loc>(.|\n)+?<\/loc>/g, 'contains loc properties');
+      t.regex(file, urlsRegex, 'has urlset property');
+      t.regex(file, /<url>(.|\n)+?<\/url>/g, 'contains url properties');
+      t.regex(file, /<loc>(.|\n)+?<\/loc>/g, 'contains loc properties');
 
       t.end();
     }
@@ -69,8 +71,9 @@ test.cb('should restrict crawler to baseurl if option is enabled', function (t) 
     t.is(stderr, '', 'no error messages');
     var filePath = path.resolve('sitemap_baseurl.xml');
     t.truthy(fs.existsSync(filePath));
-    var regex = new RegExp('http:\/\/' + baseUrl + ':' + port + '/<');
-    t.falsy(regex.test(fs.readFileSync(filePath)), 'index page is not included in sitemap');
+    var regex = new RegExp('[^(http:\/\/' + baseUrl + ':' + port + '/)]<');
+    var file = fs.readFileSync(filePath, 'utf-8');
+    t.regex(file, regex, 'index page is not included in sitemap');
 
     t.end();
   });
@@ -87,7 +90,7 @@ test.cb('should include query strings if enabled', function (t) {
       t.truthy(fs.existsSync(filePath));
 
       var regex = new RegExp('/?querypage');
-      t.truthy(regex.test(fs.readFileSync(filePath)), 'query page included');
+      t.regex(fs.readFileSync(filePath, 'utf-8'), regex, 'query page included');
 
       t.end();
     }

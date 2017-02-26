@@ -87,9 +87,7 @@ generator.on('done', function (sitemaps, store) {
         filePath = filePath.replace(/(\.xml)$/, '_part' + index + '$1');
       }
 
-      return fs.writeFileSync(filePath, map, function (err) {
-        if (err) throw err;
-      });
+      return fs.writeFileSync(filePath, map);
     });
   } else {
     console.error(chalk.red('URL not found.'));
