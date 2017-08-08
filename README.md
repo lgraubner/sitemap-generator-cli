@@ -1,16 +1,26 @@
 # Sitemap Generator CLI
 
-[![Travis](https://img.shields.io/travis/lgraubner/sitemap-generator-cli.svg)](https://travis-ci.org/lgraubner/sitemap-generator-cli) [![David](https://img.shields.io/david/lgraubner/sitemap-generator-cli.svg)](https://david-dm.org/lgraubner/sitemap-generator-cli) [![David Dev](https://img.shields.io/david/dev/lgraubner/sitemap-generator-cli.svg)](https://david-dm.org/lgraubner/sitemap-generator-cli#info=devDependencies) [![npm](https://img.shields.io/npm/v/sitemap-generator-cli.svg)](https://www.npmjs.com/package/sitemap-generator-cli)
+[![Travis](https://img.shields.io/travis/lgraubner/sitemap-generator-cli.svg)](https://travis-ci.org/lgraubner/sitemap-generator-cli) [![David](https://img.shields.io/david/lgraubner/sitemap-generator-cli.svg)](https://david-dm.org/lgraubner/sitemap-generator-cli) [![npm](https://img.shields.io/npm/v/sitemap-generator-cli.svg)](https://www.npmjs.com/package/sitemap-generator-cli)
 
 > Create xml sitemaps from the command line.
 
-## Installation
+Generates a sitemap by crawling your site. Uses streams to efficiently write the sitemap to your drive. Is cappable of creating multiple sitemaps if threshold is reached. Respects robots.txt and meta tags.
+
+## Table of contents
+
+- [Install](#install)
+- [Usage](#usage)
+- [Options](#options)
+- [License](#license)
+
+## Install
 
 ```BASH
 $ npm install -g sitemap-generator-cli
 ```
 
 ## Usage
+
 ```BASH
 $ sitemap-generator [options] <url> <filepath>
 ```
@@ -19,11 +29,14 @@ The crawler will fetch all folder URL pages and file types [parsed by Google](ht
 
 When the crawler finished the XML Sitemap will be built and saved to your specified filepath. If the count of fetched pages is greater than 50000 it will be splitted into several sitemap files and create a sitemapindex file. Google does not allow more than 50000 items in one sitemap.
 
+Example:
+
 ```BASH
 $ sitemap-generator http://example.com some/path/sitemap.xml
 ```
 
 ## Options
+
 ```BASH
 $ sitemap-generator --help
 
@@ -33,33 +46,18 @@ $ sitemap-generator --help
 
     -h, --help     output usage information
     -V, --version  output the version number
-    -b, --baseurl  only allow URLs which match given <url>
     -q, --query    consider query string
     -v, --verbose  print details when crawling
 ```
 
-Example:
-
-```Bash
-// strictly match given path and consider query string
-$ sitemap-generator -bq example.com/foo/ sitemap.xml
-```
-
-###  `--baseurl`
-
-Default: `false`
-
-If you specify an URL with a path (e.g. `http://example.com/foo/`) and this option is set to `true` the crawler will only fetch URL's matching `example.com/foo/*`. Otherwise it could also fetch `example.com` in case a link to this URL is provided
-
-
 ### `--query`
-
-Default: `false`
 
 Consider URLs with query strings like `http://www.example.com/?foo=bar` as indiviual sites and add them to the sitemap.
 
 ### `--verbose`
 
-Default: `false`
-
 Print debug messages during crawling process. Also prints out a summery when finished.
+
+## License
+
+[MIT](https://github.com/lgraubner/sitemap-generator/blob/master/LICENSE) © [Lars Graubner](https://larsgraubner.com)
