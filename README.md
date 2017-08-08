@@ -15,17 +15,19 @@ Generates a sitemap by crawling your site. Uses streams to efficiently write the
 
 ## Install
 
+This module is available on [npm](https://www.npmjs.com/).
+
 ```BASH
 $ npm install -g sitemap-generator-cli
 ```
 
 ## Usage
 
+The crawler will fetch all folder URL pages and file types [parsed by Google](https://support.google.com/webmasters/answer/35287?hl=en). If present the `robots.txt` will be taken into account and possible rules are applied for each URL to consider if it should be added to the sitemap. Also the crawler will not fetch URL's from a page if the robots meta tag with the value `nofollow` is present and ignore them completely if `noindex` rule is present. The crawler is able to apply the `base` value to found links.
+
 ```BASH
 $ sitemap-generator [options] <url> <filepath>
 ```
-
-The crawler will fetch all folder URL pages and file types [parsed by Google](https://support.google.com/webmasters/answer/35287?hl=en). If present the `robots.txt` will be taken into account and possible rules are applied for each URL to consider if it should be added to the sitemap. Also the crawler will not fetch URL's from a page if the robots meta tag with the value `nofollow` is present and ignore them completely if `noindex` rule is present. The crawler is able to apply the `base` value to found links.
 
 When the crawler finished the XML Sitemap will be built and saved to your specified filepath. If the count of fetched pages is greater than 50000 it will be splitted into several sitemap files and create a sitemapindex file. Google does not allow more than 50000 items in one sitemap.
 
@@ -50,11 +52,11 @@ $ sitemap-generator --help
     -v, --verbose  print details when crawling
 ```
 
-### `--query`
+### query
 
 Consider URLs with query strings like `http://www.example.com/?foo=bar` as indiviual sites and add them to the sitemap.
 
-### `--verbose`
+### verbose
 
 Print debug messages during crawling process. Also prints out a summery when finished.
 
