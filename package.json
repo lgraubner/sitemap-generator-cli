@@ -33,7 +33,7 @@
   },
   "preferGlobal": true,
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "bin": {
     "sitemap-generator": "index.js"
