@@ -27,9 +27,9 @@
     "url": "https://github.com/lgraubner/sitemap-generator-cli/issues"
   },
   "dependencies": {
-    "chalk": "^2.0.1",
+    "chalk": "^2.1.0",
     "commander": "^2.11.0",
-    "sitemap-generator": "^7.0.0"
+    "sitemap-generator": "^7.0.2"
   },
   "preferGlobal": true,
   "engines": {
@@ -50,7 +50,7 @@
     "execa": "^0.8.0",
     "husky": "^0.14.3",
     "jest": "^20.0.4",
-    "lint-staged": "^4.0.2",
+    "lint-staged": "^4.0.3",
     "prettier": "^1.5.3"
   },
   "scripts": {
