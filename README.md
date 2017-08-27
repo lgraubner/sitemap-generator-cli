@@ -46,11 +46,11 @@ $ sitemap-generator --help
 
   Options:
 
-    -h, --help        output usage information
-    -V, --version     output the version number
-    -q, --query       consider query string
-    -u, --user-agent  set custom User Agent
-    -v, --verbose     print details when crawling
+    -h, --help                output usage information
+    -V, --version             output the version number
+    -q, --query               consider query string
+    -u, --user-agent <agent>  set custom User Agent
+    -v, --verbose             print details when crawling
 ```
 
 ### query
