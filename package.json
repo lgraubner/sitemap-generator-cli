@@ -1,6 +1,6 @@
 {
   "name": "sitemap-generator-cli",
-  "version": "6.1.4",
+  "version": "6.2.0",
   "description": "Create xml sitemaps from the command line.",
   "homepage": "https://github.com/lgraubner/sitemap-generator-cli",
   "author": {
