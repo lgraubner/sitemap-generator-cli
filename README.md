@@ -46,15 +46,20 @@ $ sitemap-generator --help
 
   Options:
 
-    -h, --help     output usage information
-    -V, --version  output the version number
-    -q, --query    consider query string
-    -v, --verbose  print details when crawling
+    -h, --help        output usage information
+    -V, --version     output the version number
+    -q, --query       consider query string
+    -u, --user-agent  set custom User Agent
+    -v, --verbose     print details when crawling
 ```
 
 ### query
 
 Consider URLs with query strings like `http://www.example.com/?foo=bar` as indiviual sites and add them to the sitemap.
+
+### user-agent
+
+Set a custom User Agent used for crawling. Default is `Node/SitemapGenerator`.
 
 ### verbose
 

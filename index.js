@@ -11,7 +11,7 @@ function sitemapFactory() {
     .version(pkg.version)
     .usage('[options] <url> <filepath>')
     .option('-q, --query', 'consider query string')
-    .option('-u, --user-agent')
+    .option('-u, --user-agent', 'set custom User Agent')
     .option('-v, --verbose', 'print details when crawling')
     .parse(process.argv);
 
