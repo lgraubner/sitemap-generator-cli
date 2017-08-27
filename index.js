@@ -11,6 +11,7 @@ function sitemapFactory() {
     .version(pkg.version)
     .usage('[options] <url> <filepath>')
     .option('-q, --query', 'consider query string')
+    .option('-u, --user-agent')
     .option('-v, --verbose', 'print details when crawling')
     .parse(process.argv);
 
@@ -20,10 +21,17 @@ function sitemapFactory() {
     process.exit();
   }
 
-  const generator = SitemapGenerator(program.args[0], {
+  const options = {
     stripQuerystring: !program.query,
     filepath: program.args[1],
-  });
+  };
+
+  // only pass if set to keep default
+  if (program.userAgent) {
+    options.userAgent = program.userAgent;
+  }
+
+  const generator = SitemapGenerator(program.args[0], options);
 
   // add event listeners to crawler if verbose mode enabled
   if (program.verbose) {
