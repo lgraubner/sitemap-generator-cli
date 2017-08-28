@@ -29,7 +29,7 @@
   "dependencies": {
     "chalk": "^2.1.0",
     "commander": "^2.11.0",
-    "sitemap-generator": "^7.2.0"
+    "sitemap-generator": "^7.2.1"
   },
   "preferGlobal": true,
   "engines": {
