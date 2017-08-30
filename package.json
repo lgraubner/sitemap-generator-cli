@@ -29,7 +29,7 @@
   "dependencies": {
     "chalk": "^2.1.0",
     "commander": "^2.11.0",
-    "sitemap-generator": "^7.2.1"
+    "sitemap-generator": "^7.2.2"
   },
   "preferGlobal": true,
   "engines": {
@@ -51,7 +51,7 @@
     "husky": "^0.14.3",
     "jest": "^20.0.4",
     "lint-staged": "^4.0.4",
-    "prettier": "^1.5.3"
+    "prettier": "^1.6.1"
   },
   "scripts": {
     "test": "jest",
