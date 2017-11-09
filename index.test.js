@@ -16,7 +16,7 @@ test(
 
     return execa('node', [
       'index.js',
-      'https://larsgraubner.com',
+      'http://example.com',
       'sitemap.xml',
     ]).then(() => {
       expect(() => fs.accessSync('sitemap.xml')).not.toThrow();
@@ -32,7 +32,7 @@ test(
 
     return execa('node', [
       'index.js',
-      'https://larsgraubner.com',
+      'http://example.com',
       'sitemap.xml',
       '--verbose',
     ]).then(result => {
