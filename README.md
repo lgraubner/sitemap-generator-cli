@@ -42,16 +42,26 @@ $ sitemap-generator http://example.com some/path/sitemap.xml
 ```BASH
 $ sitemap-generator --help
 
-  Usage: cli [options] <url> <filepath>
+  Usage: cli [options] <url>
 
   Options:
 
     -h, --help                output usage information
     -V, --version             output the version number
+    -f, --file                path to file including filename
     -q, --query               consider query string
     -u, --user-agent <agent>  set custom User Agent
     -v, --verbose             print details when crawling
 ```
+
+### file
+
+Path to file to write including the filename itself. Path can be absolute or relative. Examples:
+
+- `sitemap.xml`
+- `mymap.xml`
+- `/var/www/sitemap.xml`
+- `./sitemap.myext`
 
 ### query
 

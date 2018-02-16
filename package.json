@@ -27,9 +27,9 @@
     "url": "https://github.com/lgraubner/sitemap-generator-cli/issues"
   },
   "dependencies": {
-    "chalk": "2.3.0",
-    "commander": "2.11.0",
-    "sitemap-generator": "7.5.2"
+    "chalk": "2.3.1",
+    "commander": "2.14.1",
+    "sitemap-generator": "8.0.0"
   },
   "preferGlobal": true,
   "engines": {
@@ -40,27 +40,28 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "babel-eslint": "8.0.2",
-    "eslint": "4.10.0",
+    "babel-eslint": "8.2.1",
+    "eslint": "4.18.0",
     "eslint-config-airbnb": "16.1.0",
-    "eslint-config-prettier": "2.7.0",
+    "eslint-config-prettier": "2.9.0",
     "eslint-plugin-import": "2.8.0",
-    "eslint-plugin-jsx-a11y": "6.0.2",
-    "eslint-plugin-react": "7.4.0",
-    "execa": "0.8.0",
+    "eslint-plugin-jsx-a11y": "6.0.3",
+    "eslint-plugin-react": "7.6.1",
+    "execa": "0.9.0",
     "husky": "0.14.3",
-    "jest": "21.2.1",
-    "lint-staged": "4.3.0",
-    "prettier": "1.8.2"
+    "jest": "22.3.0",
+    "lint-staged": "6.1.1",
+    "prettier": "1.10.2"
   },
   "scripts": {
     "test": "jest",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "format": "prettier --write '**/*.js'"
   },
   "lint-staged": {
     "*.js": [
       "eslint --fix",
-      "prettier --single-quote --trailing-comma es5 --write",
+      "prettier",
       "git add"
     ]
   }
