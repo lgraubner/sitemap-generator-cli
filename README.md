@@ -26,7 +26,7 @@ $ npm install -g sitemap-generator-cli
 The crawler will fetch all folder URL pages and file types [parsed by Google](https://support.google.com/webmasters/answer/35287?hl=en). If present the `robots.txt` will be taken into account and possible rules are applied for each URL to consider if it should be added to the sitemap. Also the crawler will not fetch URL's from a page if the robots meta tag with the value `nofollow` is present and ignore them completely if `noindex` rule is present. The crawler is able to apply the `base` value to found links.
 
 ```BASH
-$ sitemap-generator [options] <url> <filepath>
+$ sitemap-generator [options] <url>
 ```
 
 When the crawler finished the XML Sitemap will be built and saved to your specified filepath. If the count of fetched pages is greater than 50000 it will be splitted into several sitemap files and create a sitemapindex file. Google does not allow more than 50000 items in one sitemap.
@@ -34,7 +34,7 @@ When the crawler finished the XML Sitemap will be built and saved to your specif
 Example:
 
 ```BASH
-$ sitemap-generator http://example.com some/path/sitemap.xml
+$ sitemap-generator http://example.com
 ```
 
 ## Options
@@ -48,15 +48,17 @@ $ sitemap-generator --help
 
     -h, --help                output usage information
     -V, --version             output the version number
-    -f, --file                path to file including filename
+    -f, --filepath            path to file including filename
     -q, --query               consider query string
     -u, --user-agent <agent>  set custom User Agent
     -v, --verbose             print details when crawling
 ```
 
-### file
+### filepath
 
-Path to file to write including the filename itself. Path can be absolute or relative. Examples:
+Path to file to write including the filename itself. Path can be absolute or relative. Default is `sitemap.xml`.
+
+Examples:
 
 - `sitemap.xml`
 - `mymap.xml`
