@@ -31,6 +31,14 @@
     "commander": "2.14.1",
     "sitemap-generator": "8.0.0"
   },
+  "devDependencies": {
+    "eslint": "4.18.0",
+    "execa": "0.9.0",
+    "husky": "0.14.3",
+    "jest": "22.3.0",
+    "lint-staged": "6.1.1",
+    "prettier": "1.10.2"
+  },
   "preferGlobal": true,
   "engines": {
     "node": ">=6"
@@ -39,30 +47,34 @@
     "sitemap-generator": "index.js"
   },
   "license": "MIT",
-  "devDependencies": {
-    "babel-eslint": "8.2.1",
-    "eslint": "4.18.0",
-    "eslint-config-airbnb": "16.1.0",
-    "eslint-config-prettier": "2.9.0",
-    "eslint-plugin-import": "2.8.0",
-    "eslint-plugin-jsx-a11y": "6.0.3",
-    "eslint-plugin-react": "7.6.1",
-    "execa": "0.9.0",
-    "husky": "0.14.3",
-    "jest": "22.3.0",
-    "lint-staged": "6.1.1",
-    "prettier": "1.10.2"
-  },
   "scripts": {
+    "lint": "eslint .",
     "test": "jest",
-    "precommit": "lint-staged",
-    "format": "prettier --write '**/*.js'"
+    "precommit": "lint-staged"
   },
   "lint-staged": {
     "*.js": [
       "eslint --fix",
-      "prettier",
+      "prettier --write",
       "git add"
     ]
+  },
+  "prettier": {
+    "singleQuote": true
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 6
+    },
+    "extends": [
+      "eslint:recommended"
+    ],
+    "env": {
+      "jest": true,
+      "node": true
+    },
+    "rules": {
+      "no-console": 0
+    }
   }
 }
