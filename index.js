@@ -15,6 +15,16 @@ function sitemapFactory() {
       'path to file including filename',
       'sitemap.xml'
     )
+    .option(
+      '-m, --max-entries <maxEntries>',
+      'limits the maximum number of URLs per sitemap file',
+      50000
+    )
+    .option(
+      '-d, --max-depth <maxDepth>',
+      'limits the maximum distance from the original request',
+      0
+    )
     .option('-q, --query', 'consider query string')
     .option('-u, --user-agent <agent>', 'set custom User Agent')
     .option('-v, --verbose', 'print details when crawling')
@@ -28,7 +38,9 @@ function sitemapFactory() {
 
   const options = {
     stripQuerystring: !program.query,
-    filepath: program.filepath
+    filepath: program.filepath,
+    maxEntriesPerFile: program.maxEntries,
+    maxDepth: program.maxDepth
   };
 
   // only pass if set to keep default
