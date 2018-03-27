@@ -20,7 +20,7 @@ This module is available on [npm](https://www.npmjs.com/).
 ```BASH
 npm install -g sitemap-generator-cli
 # or execute it directly with npx (since npm v5.2)
-npx sitemap-generator https://example.com
+npx sitemap-generator-cli https://example.com
 ```
 
 ## Usage
