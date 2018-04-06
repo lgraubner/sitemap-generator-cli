@@ -27,17 +27,17 @@
     "url": "https://github.com/lgraubner/sitemap-generator-cli/issues"
   },
   "dependencies": {
-    "chalk": "2.3.1",
-    "commander": "2.14.1",
-    "sitemap-generator": "8.0.0"
+    "chalk": "2.3.2",
+    "commander": "2.15.1",
+    "sitemap-generator": "8.0.1"
   },
   "devDependencies": {
-    "eslint": "4.18.1",
-    "execa": "0.9.0",
+    "eslint": "4.19.1",
+    "execa": "0.10.0",
     "husky": "0.14.3",
-    "jest": "22.4.0",
-    "lint-staged": "7.0.0",
-    "prettier": "1.10.2"
+    "jest": "22.4.3",
+    "lint-staged": "7.0.4",
+    "prettier": "1.11.1"
   },
   "preferGlobal": true,
   "engines": {
