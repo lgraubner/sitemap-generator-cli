@@ -28,6 +28,19 @@ function sitemapFactory() {
     .option('-q, --query', 'consider query string')
     .option('-u, --user-agent <agent>', 'set custom User Agent')
     .option('-v, --verbose', 'print details when crawling')
+    .option(
+      '-c, --max-concurrency <maxConcurrency>',
+      'maximum number of requests the crawler will run simultaneously',
+      v => {
+        return parseInt(v);
+      },
+      5
+    )
+    .option(
+      '-r, --no-respect-robots-txt',
+      'controls whether the crawler should respect rules in robots.txt',
+      true
+    )
     .parse(process.argv);
 
   // display help if no url/filepath provided
@@ -40,16 +53,16 @@ function sitemapFactory() {
     stripQuerystring: !program.query,
     filepath: program.filepath,
     maxEntriesPerFile: program.maxEntries,
-    maxDepth: program.maxDepth
+    maxDepth: program.maxDepth,
+    maxConcurrency: program.maxConcurrency,
+    respectRobotsTxt: !!program.respectRobotsTxt
   };
-
   // only pass if set to keep default
   if (program.userAgent) {
     options.userAgent = program.userAgent;
   }
 
   const generator = SitemapGenerator(program.args[0], options);
-
   if (program.verbose) {
     let added = 0;
     let ignored = 0;
