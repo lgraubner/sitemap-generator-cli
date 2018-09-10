@@ -48,14 +48,16 @@ sitemap-generator --help
 
   Options:
 
-    -h, --help                output usage information
-    -V, --version             output the version number
-    -f, --filepath            path to file including filename
-    -m, --max-entries         limits the maximum number of URLS per sitemap file
-    -d, --max-depth           limits the maximum distance from the original request
-    -q, --query               consider query string
-    -u, --user-agent <agent>  set custom User Agent
-    -v, --verbose             print details when crawling
+    -V, --version                           output the version number
+    -f, --filepath <filepath>               path to file including filename (default: sitemap.xml)
+    -m, --max-entries <maxEntries>          limits the maximum number of URLs per sitemap file (default: 50000)
+    -d, --max-depth <maxDepth>              limits the maximum distance from the original request (default: 0)
+    -q, --query                             consider query string
+    -u, --user-agent <agent>                set custom User Agent
+    -v, --verbose                           print details when crawling
+    -c, --max-concurrency <maxConcurrency>  maximum number of requests the crawler will run simultaneously (default: 5)
+    -r, --no-respect-robots-txt             controls whether the crawler should respect rules in robots.txt
+    -h, --help                              output usage information
 ```
 
 ### filepath
@@ -69,6 +71,10 @@ Examples:
 - `/var/www/sitemap.xml`
 - `./sitemap.myext`
 
+### maxConcurrency
+
+Sets the maximum number of requests the crawler will run simultaneously (default: 5).
+
 ### maxEntries
 
 fine a limit of URLs per sitemap files, useful for site with lots of urls. Defaults to 50000.
@@ -76,6 +82,10 @@ fine a limit of URLs per sitemap files, useful for site with lots of urls. Defau
 ### maxDepth
 
 Set a maximum distance from the original request to crawl URLs, useful for generating smaller `sitemap.xml` files. Defaults to 0, which means it will crawl all levels.
+
+### noRespectRobotsTxt
+
+Controls whether the crawler should respect rules in robots.txt.
 
 ### query
 
