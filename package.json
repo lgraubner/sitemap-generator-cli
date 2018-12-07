@@ -49,8 +49,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint .",
-    "test": "jest",
-    "precommit": "lint-staged"
+    "test": "jest"
   },
   "lint-staged": {
     "*.js": [
@@ -79,5 +78,10 @@
   },
   "jest": {
     "testEnvironment": "node"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
