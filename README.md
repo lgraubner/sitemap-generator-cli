@@ -89,7 +89,7 @@ Controls whether the crawler should respect rules in robots.txt.
 
 ### query
 
-Consider URLs with query strings like `http://www.example.com/?foo=bar` as indiviual sites and add them to the sitemap.
+Consider URLs with query strings like `http://www.example.com/?foo=bar` as individual sites and add them to the sitemap.
 
 ### user-agent
 
