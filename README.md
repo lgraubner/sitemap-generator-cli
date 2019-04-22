@@ -77,7 +77,7 @@ Sets the maximum number of requests the crawler will run simultaneously (default
 
 ### maxEntries
 
-fine a limit of URLs per sitemap files, useful for site with lots of urls. Defaults to 50000.
+Define a limit of URLs per sitemap files, useful for site with lots of urls. Defaults to 50000.
 
 ### maxDepth
 
