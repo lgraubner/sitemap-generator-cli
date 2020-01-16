@@ -57,6 +57,9 @@ sitemap-generator --help
     -v, --verbose                           print details when crawling
     -c, --max-concurrency <maxConcurrency>  maximum number of requests the crawler will run simultaneously (default: 5)
     -r, --no-respect-robots-txt             controls whether the crawler should respect rules in robots.txt
+    -l, --last-mod                          add Last-Modified header to xml
+    -g, --change-freq <changeFreq>          adds a <changefreq> line to each URL in the sitemap.
+    -p, --priority-map <priorityMap>        priority for each depth url, values between 1.0 and 0.0, example: "1.0,0.8 0.6,0.4"
     -h, --help                              output usage information
 ```
 
@@ -98,6 +101,18 @@ Set a custom User Agent used for crawling. Default is `Node/SitemapGenerator`.
 ### verbose
 
 Print debug messages during crawling process. Also prints out a summery when finished.
+
+### last-mod
+
+add Last-Modified header to xml
+
+### change-freq
+
+adds a <changefreq> line to each URL in the sitemap.
+
+### priority-map
+
+add priority for each depth url, values between 1.0 and 0.0, example: "1.0,0.8 0.6,0.4"
 
 ## License
 
