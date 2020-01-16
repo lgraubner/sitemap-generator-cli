@@ -41,6 +41,15 @@ function sitemapFactory() {
       'controls whether the crawler should respect rules in robots.txt',
       true
     )
+    .option('-l, --last-mod', 'add Last-Modified header to xml', true)
+    .option(
+      '-g, --change-freq <changeFreq>',
+      'adds a <changefreq> line to each URL in the sitemap.'
+    )
+    .option(
+      '-p, --priority-map <priorityMap>',
+      'priority for each depth url, values between 1.0 and 0.0, example: "1.0,0.8,0.6,0.4" '
+    )
     .parse(process.argv);
 
   // display help if no url/filepath provided
@@ -49,13 +58,21 @@ function sitemapFactory() {
     process.exit();
   }
 
+  let arrayPriority = [];
+  if (program.priorityMap) {
+    arrayPriority = program.priorityMap.split(',');
+  }
+
   const options = {
     stripQuerystring: !program.query,
     filepath: program.filepath,
     maxEntriesPerFile: program.maxEntries,
     maxDepth: program.maxDepth,
     maxConcurrency: program.maxConcurrency,
-    respectRobotsTxt: !!program.respectRobotsTxt
+    respectRobotsTxt: !!program.respectRobotsTxt,
+    lastMod: !!program.lastMod,
+    changeFreq: program.changeFreq,
+    priorityMap: arrayPriority
   };
   // only pass if set to keep default
   if (program.userAgent) {
