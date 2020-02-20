@@ -60,6 +60,7 @@ sitemap-generator --help
     -l, --last-mod                          add Last-Modified header to xml
     -g, --change-freq <changeFreq>          adds a <changefreq> line to each URL in the sitemap.
     -p, --priority-map <priorityMap>        priority for each depth url, values between 1.0 and 0.0, example: "1.0,0.8 0.6,0.4"
+    -x, --proxy <url>                       Use the passed proxy URL
     -h, --help                              output usage information
 ```
 
