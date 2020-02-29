@@ -3,6 +3,8 @@
 const program = require('commander');
 const SitemapGenerator = require('sitemap-generator');
 const chalk = require('chalk');
+const httpagent = require('http-proxy-agent');
+const httpsagent = require('https-proxy-agent');
 
 const pkg = require('./package.json');
 
@@ -50,6 +52,7 @@ function sitemapFactory() {
       '-p, --priority-map <priorityMap>',
       'priority for each depth url, values between 1.0 and 0.0, example: "1.0,0.8,0.6,0.4" '
     )
+    .option('-x, --proxy <url>', 'Use the passed proxy URL')
     .parse(process.argv);
 
   // display help if no url/filepath provided
@@ -77,6 +80,14 @@ function sitemapFactory() {
   // only pass if set to keep default
   if (program.userAgent) {
     options.userAgent = program.userAgent;
+  }
+
+  // make use of proxy URL if passeds to us
+  if (program.proxy) {
+    var httpProxyAgent = new httpagent(program.proxy);
+    var httpsProxyAgent = new httpsagent(program.proxy);
+    options.httpAgent = httpProxyAgent;
+    options.httpsAgent = httpsProxyAgent;
   }
 
   const generator = SitemapGenerator(program.args[0], options);
