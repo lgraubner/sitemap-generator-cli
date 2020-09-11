@@ -53,6 +53,10 @@ function sitemapFactory() {
       'priority for each depth url, values between 1.0 and 0.0, example: "1.0,0.8,0.6,0.4" '
     )
     .option('-x, --proxy <url>', 'Use the passed proxy URL')
+    .option(
+      '-b, --base-url <url>',
+      'Use the passed URL as the base URL for all sitemap URLs'
+    )
     .parse(process.argv);
 
   // display help if no url/filepath provided
@@ -75,7 +79,8 @@ function sitemapFactory() {
     respectRobotsTxt: !!program.respectRobotsTxt,
     lastMod: !!program.lastMod,
     changeFreq: program.changeFreq,
-    priorityMap: arrayPriority
+    priorityMap: arrayPriority,
+    baseUrl: program.baseUrl
   };
   // only pass if set to keep default
   if (program.userAgent) {
